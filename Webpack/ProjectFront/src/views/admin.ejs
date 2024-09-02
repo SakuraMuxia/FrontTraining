@@ -1,0 +1,49 @@
+<div id="__sub-route-view">
+  <div class="card adminlist">
+    <div class="card-header">
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+        data-target="#addAdminModal">添加管理员</button>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" id="amdinListBox">
+        <!-- 管理员列表 -->
+    </div>
+  </div>
+  <!-- 模态框 -->
+  <div class="modal fade" id="addAdminModal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">添加管理员</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="adminForm" id="addAdminForm">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">管理员账号</label>
+                            <input type="text" name="adminName" class="form-control" id="exampleInputEmail1" placeholder="请输入管理员账号">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">管理员密码</label>
+                            <input type="password" name="passWord" class="form-control" id="exampleInputPassword1"
+                                placeholder="请输入管理员密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword2">重复密码</label>
+                            <input name="rePassWord" type="password" class="form-control" id="exampleInputPassword2"
+                                placeholder="请输入管理员密码">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="addAdminBtn" class="btn btn-primary">添加</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
