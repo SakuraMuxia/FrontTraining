@@ -5,13 +5,13 @@
                 <input ref='inputBox' @keyup.enter="addTaskList" type="text" placeholder="请输入你的任务名称，按回车键确认" />
             </div>
             <ul class="todo-main">
-                <li @mouseenter="activeId = item.id" @mouseleave="activeId = 0" v-for="(item, index) in taskList"
+                <li @mouseenter="activeId = item.id" @mouseleave="activeId = 0" v-for="(item) in state.taskList"
                     :key="item.id">
                     <label>
                         <input @change="setIsCheckedById(item.id)" :checked="item.isChecked" type="checkbox" />
                         <span>{{ item.title }}</span>
                     </label>
-                    <button class="btn btn-danger" @click="delTaskListByIndex(index)"
+                    <button class="btn btn-danger" @click="delTaskListByIndex(item.id)"
                         v-show="item.id === activeId">删除</button>
                 </li>
             </ul>
@@ -20,10 +20,11 @@
                     <input @change="changeIsAll" :checked="isAll()" type="checkbox" />
                 </label>
                 <span>
-                    <span>已完成{{ taskList.filter(item => item.isChecked).length }}</span> / 全部{{ taskList.length }}
+                    <span>已完成{{ state.taskList.filter(item => item.isChecked).length }}</span> / 全部{{
+                        state.taskList.length }}
                 </span>
                 <button class="btn btn-danger" @click="clearAllIsChecked"
-                    v-show="taskList.filter(item => item.isChecked).length > 0">清除已完成任务</button>
+                    v-show="state.taskList.filter(item => item.isChecked).length > 0">清除已完成任务</button>
             </div>
         </div>
     </div>
@@ -39,8 +40,14 @@ type TTaskInfo = {
     title: string,
     isChecked: boolean
 }
+// 定义一个TState数据类型
+type TState = {
+    taskList: TTaskInfo
+}
 // 创建一个TaskInfo类型的Proxy数组
-let taskList = reactive<TTaskInfo[]>([])
+let state = reactive({
+    taskList: []
+})
 
 // 当前选中的ID
 let activeId = ref(0)
@@ -49,36 +56,33 @@ const inputBox = ref()
 const changeIsAll = function () {
     // isAll当前是否全选，再取反
     let a = !isAll();
-    taskList.forEach(item => item.isChecked = a)
+    // 方式1
+    // taskList.value.forEach(item => item.isChecked = a)
+    // 方式2
+    state.taskList = state.taskList.map(item => {
+        item.isChecked = a
+        return item
+    })
 }
 
 // 清除所有被选中的
 const clearAllIsChecked = function () {
     // 方式1 [...taskList] 先复制一份数据
-    taskList.forEach(()=>{
-        const index = taskList.findIndex(v=>v.isChecked);
-        if(index>-1){
-            taskList.splice(index, 1);
-        }
-    })
-    // 方式2
-    const copyTaskList = taskList.filter(v=>!v.isChecked);
-    // 全部删除后，用新的数组添加
-    taskList.splice(0,taskList.length,...copyTaskList);
+    state.taskList = state.taskList.filter(item => !item.isChecked)
 }
 
 // 根据ID修改选中的状态
-const setIsCheckedById = function(id:number){
-     const info = taskList.find(v=>v.id===id) as TTaskInfo;
-     info.isChecked = !info.isChecked;
+const setIsCheckedById = function (id: number) {
+    const info = state.taskList.find(v => v.id === id);
+    info.isChecked = !info.isChecked;
 }
 
 // 是否被全选
 const isAll = function () {
     // 选中的数量
-    let checkedNum = taskList.filter(item => item.isChecked).length;
+    let checkedNum = state.taskList.filter(item => item.isChecked).length;
     // 任务的总数量
-    let allCheckedNum = taskList.length;
+    let allCheckedNum = state.taskList.length;
     let isAllChecked = checkedNum === allCheckedNum;
     // 排除任务为0时全选
     if (checkedNum === 0 && allCheckedNum === 0)
@@ -86,9 +90,9 @@ const isAll = function () {
     return isAllChecked;
 }
 // 通过index删除任务
-const delTaskListByIndex = function (index: number) {
+const delTaskListByIndex = function (id: number) {
     if (window.confirm("您确定要删除该任务吗")) {
-        taskList.splice(index, 1);
+        state.taskList = state.taskList.filter(item => item.id !== id)
     }
 }
 // 添加任务
@@ -98,19 +102,23 @@ const addTaskList = function (e: any) {
         alert("请输入任务标题！");
         return;
     }
-    if (taskList.some(v => v.title === title)) {
+    if (state.taskList.some(v => v.title === title)) {
         alert("任务标题不允许重复");
         return;
     }
-    taskList.unshift({
-        id: Date.now(),
-        isChecked: true,
-        title
-    })
-    nextTick(function(){
-        (document.querySelector('input') as HTMLInputElement).value = ''
-    })
+    state.taskList = [
+        ...state.taskList,
+        {
+            id: Date.now(),
+            isChecked: true,
+            title
+        }
+    ]
 }
+nextTick(function () {
+    (document.querySelector('input') as HTMLInputElement).value = ''
+})
+
 </script>
 
 <style scoped>

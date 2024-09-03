@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const webpack = require("webpack")
 module.exports = defineConfig({
     transpileDependencies: true,
     devServer: {
@@ -16,5 +17,17 @@ module.exports = defineConfig({
             })
             return definitions
         })
-    }
+    },
+    // 配置Jquery
+    configureWebpack: {
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery",
+                "windows.jQuery": "jquery",
+                "windows.$": "jquery",
+                Popper: ["popper.js", "default"]
+            })
+        ]
+    },
 })
