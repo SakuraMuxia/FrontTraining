@@ -1,0 +1,38 @@
+[
+    {
+        "path": "/",
+        "redirect": "/home"
+    },
+    {
+        "path": "/home",
+        "component": "() => import('@/pages/Home/index.vue')",
+        "children": [
+            {
+                "path":"/home",
+                "redirect":"/home/newslist"
+            },
+            {
+                "path": "/home/message",
+                "component": "() => import('@/pages/Home/Message/index.vue')",
+                "children": [
+                    {
+                        "path": "/home/message/:filmId",
+                        "component": "renderCom('Home/Message/Details')"
+                    }
+                ]
+            },
+            {
+                "path": "/home/newsList",
+                "component": "() => import('@/pages/Home/NewsList/index.vue')"
+            }
+        ]
+    },
+    {
+        "path": "/about",
+        "component": "() => import('@/pages/About/index.vue')"
+    },
+    {
+        "path": "/:pathMath(.*)",
+        "component": "() => import('@/pages/NotFount/index.vue')"
+    }
+]
