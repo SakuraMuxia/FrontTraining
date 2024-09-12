@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    const flag = true;
+    const isLoading = false;
+    const oDiv = (
+        <div>
+            我是div
+        </div>
+    )
+    function isWatchTV(age) {
+        if (age < 18) {
+            return <div>请在父母的陪同下观看</div>
+        } else if (age > 18 && age < 60) {
+            return <div>敬请欣赏</div>
+        } else if (age > 60 && age < 80) {
+            return <div>保重身体</div>
+        }
+    }
+    // 单分支 if写法
+    let single = null;
+    if (flag) {
+        single = <div>一起看电影</div>
+    }
+
+    root.render((
+        <div>
+            <h4>插值表达式也可以渲染react元素</h4>
+            {oDiv}
+            <h4>单分支</h4>
+            {flag && <div>一起看电影</div>}
+            <h4>双分支</h4>
+            {isLoading ? <h3>页面正在加载中....</h3> : <div>加载完成</div>}
+            <h4>多分支</h4>
+            {isWatchTV(16)}
+        </div>
+    ))
+</script>
+</html>

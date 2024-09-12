@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<style>
+    .box{
+        padding: 2px;
+        border: 1px,solid;
+        background-color: aqua;
+        width: 100px;
+    }
+</style>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    let class1 = "box c1 f1"
+    let class2 = ['box', 'c1', 'f1'];
+    const box = {
+        padding: '2px',
+        border: '1px solid',
+        backgroundColor: 'aqua',
+        width: '100px'
+    }
+    root.render((
+        <div>
+            <h3>样式类名</h3>
+            <div className="box">
+                box1
+            </div>
+            <div className="box c1 f1">box2</div>
+            <div className={class1}>box3</div>
+            <div className={class2}>box4</div>
+            <div className={class2.join(' ')}>box5</div>
+        </div>
+    ))
+</script>
+</html>

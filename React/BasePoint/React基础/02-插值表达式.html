@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+
+    let a = 123
+    const str = 'abc'
+    const isLoading = true
+    const fn = function(){
+        return 100
+    }
+    root.render((
+        <div>
+            <p>{a}</p>
+            <p>{str}</p>
+            <p>{true}</p>
+            <p>{undefined}</p>
+            {/* 对象报错 */}
+            {/* <p>{{ username: 'atguigu', age: 20 }}</p> */}
+            <p>数组: {['a', 'b', 'c', 'd']}</p>
+            {/* 对象报错 */}
+            {/* <p>数组: {[{ name: 'atguigu' }, { name: '迪丽热巴' }]}</p> */}
+            <p>{isLoading ? '页面加载中.....' : '页面内容'}</p>
+            {5 && 8}
+            <p>{fn()}</p>
+        </div>
+    ))
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>功能验证</title>
+</head>
+<body>
+    <h4>用户列表</h4>
+    <button>添加li</button>
+    <ul>
+        <li>Hanser</li>
+    </ul>
+    <p>无聊的并不是时间，而是平庸无奇的我。</p>
+</body>
+<script>
+    // 创建用户列表
+    const userList = ["Yousa","MinatoAqua","FBK"]
+    // 获取元素
+    const oBtn = document.querySelector('button')
+    const oUl = document.querySelector('ul')
+
+    // 绑定单机事件
+    oBtn.onclick = function(){
+        // 创建文档碎片
+        const fragment = document.createDocumentFragment();
+        // 遍历并创建元素
+        userList.forEach((item)=>{
+            // 创建li元素对象
+            const oLi = document.createElement('li')
+            // 设置li元素的内容
+            oLi.innerHTML = item
+            // 把li元素放置到文档碎片中
+            fragment.appendChild(oLi)
+        })
+        // 把文档碎片放置到DOM中
+        oUl.appendChild(fragment)
+    }
+</script>
+</html>

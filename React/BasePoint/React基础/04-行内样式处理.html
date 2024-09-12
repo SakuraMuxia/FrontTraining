@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    let style = {
+        color: 'red',
+        border: '1px solid blue',
+        backgroundColor: 'pink',
+        width: '200px',
+        height: 200,
+        fontSize: 18
+    }
+    root.render((
+        <div>
+            <h3>行内样式style处理</h3>   
+            <div style={style}>红色文字，蓝色边框，粉色背景</div>
+        </div>
+    ))
+</script>
+</html>

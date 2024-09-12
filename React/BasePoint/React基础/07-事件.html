@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <p><button onclick="fn(event);">按钮</button></p>
+    <p><a href="http://baidu.com" onclick="fn(event)">百度</a></p>
+    <p><button onclick="f1(1,2)">自定义参数和事件对象</button></p>
+    <p><button onclick="f2(1,event)">自定义参数和事件对象</button></p>
+    <p><button onclick="f3(this)">实参this,指向当前按钮</button></p>
+    <input type="text" name="" id="" oninput="f4(event)">
+    <input type="text" name="" id="" onchange="f5(event)">
+</body>
+<script>
+
+    function fn(e) {
+        console.log('this: ', this); // window
+        console.log('e: ', e); // 事件对象 PointerEvent
+        e.preventDefault(); // 阻止默认行为跳转
+    }
+
+    function f1(a, b) {
+            console.log('a: ', a); // 1
+            console.log('b: ', b); // 2
+    }
+
+    function f2(a, b) {
+        console.log('a: ', a); // 1
+        console.log('b: ', b); // 事件对象 PointerEvent
+    }
+
+    function f3(_this) {
+        console.log('_this: ', _this);// 指向当前按钮
+        console.log(this);// window 调用者是window
+    }
+
+
+    function f4(e) {
+        //oninput 触发时机，有输入就触发
+        console.log('oninput value: ', e.target.value)
+        console.log('oninput e: ', e);//事件对象 InputEvent
+    }
+
+    function f5(e) {
+        // onchange 内容有变化，并且失去交点触发
+        console.log('onchange value: ', e.target.value)
+        console.log('onchange e: ', e);//事件对象 Event 
+    }
+
+</script>
+</html>

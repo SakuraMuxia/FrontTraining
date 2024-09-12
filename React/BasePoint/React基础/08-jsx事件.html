@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    /**
+     * 在标签属性上通过 on事件名=事件回调函数 进行绑定
+     * 1. 事件名首字母大写
+     * 2. 事件回调函数填的是函数名[函数的定义、函数的引用地址]，而不是函数的调用
+     * 
+     * -----------
+     * this指向问题：undefined 说明 react中的事件回调的调用者也是window，严格模式所以是undefined
+     * 
+     * 事件对象e：
+     * 1. 一个经过react包装后的事件对象，原生的事件对象常用属性，基本都有。这个事件对象更好用，已经做过兼容性处理了
+     * 2. 如果想获取原生的事件对象：e.nativeEvent
+     * 3. 事件的回调函数是window帮我们调用的，会默认的将事件对象作为第一个实参传递给我
+     * 
+     * 事件回调函数参数的传递
+     * 包裹一个箭头函数，在箭头函数内部调用函数并传递参数
+     */
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+
+    function click1() {
+        console.log('click1');
+        console.log('this: ', this);//undefined
+    }
+
+    function click2(e) {
+        console.log(e); // SyntheticBaseEvent 事件对象
+        e.preventDefault(); // 阻止默认行为
+    }
+
+    function click3(a, b) {
+        console.log('click3');
+        console.log('a: ', a); // undefined
+        console.log('b: ', b); // undefined
+    }
+
+    function outFn() {
+        click3(1, 2);
+    }
+
+    function click4(e, a, b) {
+        console.log('e: ', e);
+        console.log('a: ', a);
+        console.log('b: ', b);
+        e.preventDefault();
+    }
+
+    /**
+     * react中的 onChange事件，实际是原生的 oninput事件
+     */
+    function change(e) {
+        console.log('change e: ', e); // e: SyntheticBaseEvent 事件对象
+        console.log('value: ', e.target.value); // 1 12 123
+    }
+    root.render((
+        <div>
+            {/* 事件触发执行回调函数click1*/}
+            <p><button onClick={click1}>click1</button></p>
+            {/* 事件触发执行回调函数click2*/}
+            <p><a href="http://baidu.com" onClick={click2}>百度</a></p>
+
+            <h3>事件回调函数传参</h3>
+            {/* 不能直接调用函数，a: undefined,b: undefined ,点击无反应,错误的示范*/}
+            <p><button onClick={click3()}>click3</button></p>
+            {/* 通过函数传递参数，a: 1,b: 2 ,正确的示范*/}
+            <p><button onClick={outFn}>传递参数</button></p>
+            {/* 通过包裹匿名函数传递参数，a: 1,b: 2 ,正确的示范*/}
+            <p><button onClick={function () { click3(2, 3) }}>包裹匿名函数传递参数</button></p>
+            {/* 通过箭头函数传递参数，a: 1,b: 2 ,正确的示范*/}
+            <p><button onClick={() => click3(2, 3)}>包裹箭头函数传参</button></p>
+
+            <h3>即传递参数，又同时传递事件对象</h3>
+            {/* 通过箭头函数传递参数：e: SyntheticBaseEvent 事件对象 a: 1,b: SyntheticBaseEvent*/}
+            <p><button onClick={(e) => { click3(1, e) }}>即传递参数，又同时传递事件对象</button></p>
+            {/* 通过箭头函数传递参数：e: SyntheticBaseEvent 事件对象 a: 100,b: 222 */}
+            <p><a href="http://baidu.com" onClick={(e) => click4(e, 100, 222)}>百度</a></p>
+            {/* 通过函数传递参数 react中的 onChange事件，实际是原生的 oninput事件 */}
+            <input type="text" onChange={change} name="" id="" />
+        </div>
+    ))
+</script>
+
+</html>

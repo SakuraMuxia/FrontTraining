@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<style>
+    .f1 {
+        font-size: 20px;
+        color: blue;
+    }
+</style>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    let arr1 = [1, 2, 3, 4];
+    let arr2 = [<li>1</li>, <li>2</li>, <li>3</li>, <li>4</li>];
+    let arr3 = arr1.map(item => {
+        return (<li>{item}</li>)
+    })
+    let users = [
+        {
+            id: 1,
+            username: 'atguigu',
+            age: 19
+        },
+        {
+            id: 2,
+            username: '迪丽热巴',
+            age: 29
+        },
+        {
+            id: 3,
+            username: '古力娜扎',
+            age: 20
+        },
+    ]
+
+    root.render((
+        <div>
+            <ul>
+                {users.map(user => (
+                    <li key={user.id}>
+                        <h3 style={{ color: 'red' }}>姓名: {user.username}</h3>
+                        <p className='f1'>年龄: {user.age}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    ))
+</script>
+</html>

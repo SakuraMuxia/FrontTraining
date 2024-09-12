@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React功能验证</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    // 结构 component 组件
+    const { Component } = React
+    // 创建类组件 Header
+    class Header extends Component{
+        // 定义方法
+        renderByClass() {
+            {/* 返回一个jsx语法的react元素 */}
+            return (
+                <div>我是Header</div>
+            )
+        }
+    }
+    // 自定义render函数
+    function renderByMy(reactComponent,root){
+        console.log('reactComponent: ', reactComponent);// react元素对象
+        console.log('root: ', root);
+        console.log('reactComponent.type: ', reactComponent.type);// class类 Header
+        // 实例化Header类
+        const instance = new reactComponent.type();
+        // 使用实例化对象调用 renderByClass 方法，得到react元素
+        const vdom = instance.renderByClass();
+        console.log('vdom: ', vdom);// 虚拟dom == react元素
+        // 通过vdom 创建 真实dom == div元素
+        const realDom = document.createElement(vdom.type);
+        // 给真实dom添加内容
+        realDom.innerHTML = vdom.props.children;
+        // 将真实dom添加到页面，完成渲染
+        root.appendChild(realDom);
+    }
+    // 获取真实DOM root根节点
+    const oRoot = document.querySelector('#root')
+    // 渲染 react 元素
+    renderByMy(<Header/>,oRoot)
+</script>
+</html>
