@@ -1,0 +1,75 @@
+/* 首页 */
+.index-carousel-inner img {
+    width: 100%;
+    height: 100%;
+
+}
+
+#index-portfolio .project-gallery img {
+    width: 100%;
+    height: 320px;
+}
+
+.services-section .product-intro-tab {
+    display: block;
+    margin-top: 20px;
+}
+
+.services-section .product-intro-tab .tab-nav {
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+
+}
+
+.services-section .product-intro-tab .tab-nav .tab-nav-item {
+    width: 50%;
+    height: 40px;
+    padding: 0 11px;
+    text-align: center;
+    line-height: 38px;
+    background: #bcb5b5;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.services-section .product-intro-tab .tab-nav .tab-nav-item.active {
+    color: #fff;
+    background: #E60112;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom: none;
+}
+
+.services-section .product-intro-tab .tab-panel {
+    position: relative;
+    border: #ccc 1px solid;
+    border-top: none;
+}
+
+.services-section .product-intro-tab .tab-panel .tab-panel-item {
+    display: none;
+}
+
+.services-section .product-intro-tab .tab-panel .tab-panel-item.active {
+    display: block;
+    opacity: 1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.services-section .services-box .product-services-post {
+    position: relative;
+    top: 0;
+    margin-top: 10px;
+    padding: 10px;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 1px;
+    transition: border-color 600ms;
+}
+
+.services-section .services-box .product-services-post:hover {
+    top: -2px;
+    border-color: #f56161;
+}

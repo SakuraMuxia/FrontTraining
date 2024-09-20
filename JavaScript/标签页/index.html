@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" media="screen" />
+    <title>Document</title>
+</head>
+<body>
+    <section class="services-section" id="index-cate">
+        <h3 class="text-center section-title"><a href="javascript:;">产品中心</a> </h3>
+        <div class="container product-container">
+            <div class="product-intro-tab" id="product-intro-tab">
+                <!-- 标签栏 -->
+                <div class="tab-nav">
+                    <div class="tab-nav-item active">漏电在线检测器</div>
+                    <div class="tab-nav-item">基站机柜热管理系统</div>
+                </div>
+                <!-- 标签页 -->
+                <div class="tab-panel">
+                    <div class="tab-panel-item active">
+                        <div class="services-box">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-6 cate-itme">
+                                    <div class="services-post product-services-post">
+                                        <a href="" class="thumb-link"><img
+                                                src="./assets/images/product-ld-dxjl-1.png" />
+                                            <div class="services-content ">
+                                                <h2><a href="javascript:;">三相交流漏电在线检测器</a></h2>
+                                                <p>三相交流漏电在线检测器安装在市电取电处，用于检测基站供电的漏电数据及漏电保护，并能实现远程合闸/断闸操作</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-6 cate-itme">
+                                    <div class="services-post product-services-post">
+                                        <a href="" class="thumb-link"><img
+                                                src="./assets/images/product-ld-dxjl-1.png" />
+                                            <div class="services-content ">
+                                                <h2><a href="javascript:;">单相交流计量开关</a></h2>
+                                                <p>单相交流计量开关安装安装在机柜内，用于对基站内交流公共用电的计量和保护,并能实现远程合闸/断闸操作</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-6 cate-itme">
+                                    <div class="services-post product-services-post">
+                                        <a href="" class="thumb-link"><img
+                                                src="./assets/images/product-ld-dxjl-1.png" />
+                                            <div class="services-content">
+                                                <h2><a href="javascript:;">单相直流计量开关</a></h2>
+                                                <p>单相直流计量开关安装安装在机柜内，用于对基站内直流负载进行分路计量和保护,并能实现远程合闸/断闸操作</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-6 cate-itme">
+                                    <div class="services-post product-services-post">
+                                        <a href="product_ld.html?name=zh" class="thumb-link"><img
+                                                src="./assets/images/product-ld-dxjl-1.png" />
+                                            <div class="services-content">
+                                                <h2><a href="javascript:;">组合式漏电检测器</a></h2>
+                                                <p>组合式漏电检测器是由三相交流在线检测器、单相交流检测器、单相直流检测器和云平台等组成
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel-item">
+                        <div class="services-box">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-6 cate-itme">
+                                    <div class="services-post product-services-post">
+                                        <a href="javascript:;" class="thumb-link"><img src="./assets/images/product-ld-dxjl-1.png" />
+                                            <div class="services-content ">
+                                                <h2><a href="javascript:;">基站/机柜高效热管理系统</a></h2>
+                                                <p>采用多冷却技术耦合的热管理系统，集成一体化系统设计，制冷效率高，节能减排效果显著。</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="assets/js/jquery.mmenu.all.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            var tabNavItems = document.querySelectorAll('#index-cate .tab-nav-item');
+            var tabPanelItems = document.querySelectorAll('#index-cate .tab-panel-item');
+            var playBox = document.querySelector('#product-intro-tab');
+            var timerIndex = 0;
+            // 定时器
+            var duration = 10000;
+            var intervalId = setInterval(next, duration);
+            tab(tabNavItems, tabPanelItems);
+            function tab(tabNavItems, tabPanelItems) {
+                tabNavItems.forEach(function (tabNavItem, index) {
+                    tabNavItem.onclick = function () {
+                        for (var i = 0; i < tabNavItems.length; i++) {
+                            tabNavItems[i].classList.remove('active');
+                            tabPanelItems[i].classList.remove('active');
+                        }
+                        tabNavItem.classList.add('active');
+                        tabPanelItems[index].classList.add('active');
+                    }
+                });
+            };
+            //监听鼠标进入
+            playBox.onmouseenter = function () {
+                clearInterval(intervalId);
+            };
+            //监听鼠标离开
+            playBox.onmouseleave = function () {
+                //再次设置定时器，返回定时器标志
+                intervalId = setInterval(next, duration);
+            };
+            function next() {
+                timerIndex++;
+                //判断不能超出有效范围
+                if (timerIndex > tabNavItems.length - 1) {
+                    timerIndex = 0;
+                };
+                tabNavItems.forEach(function (tabNavItem, index) {
+                    tabNavItem.classList.remove('active');
+                    tabPanelItems[index].classList.remove('active');
+                });
+                // 添加active类名
+                tabNavItems[timerIndex].classList.add('active');
+                tabPanelItems[timerIndex].classList.add('active');
+            };
+            var mmenu = $('nav#mmenu').mmenu({
+                slidingSubmenus: true,
+                classes: 'mm-white', //mm-fullscreen mm-light
+                extensions: ["theme-white"],
+                offCanvas: {
+                    position: "right", //left, top, right, bottom
+                    zposition: "front" //back, front,next
+                    //modal		: true
+                },
+                searchfield: false,
+                counters: false,
+                //navbars		: {
+                //content : [ "prev", "title", "next" ]
+                //},
+                navbar: {
+                    title: "网站导航"
+                },
+                header: {
+                    add: true,
+                    update: true,
+                    title: "网站导航"
+                }
+            });
+            $(".closemenu").click(function () {
+                var mmenuAPI = $("#mmenu").data("mmenu");
+                mmenuAPI.close();
+            });
+        });
+    </script>
+</body>
+</html>
