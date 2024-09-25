@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import './index.css'
-export default function Footer({todos,delDoneMission,checkAll}){
+import PubSub from 'pubsub-js';
+export default function Footer({todos}){
     let total = todos.length;
     let doneNum = todos.reduce((pre,item)=>{return pre + item.isDone},0)
+
+    function checkAll(check){
+        PubSub.publish('checkAllMsg', check)
+    }
+    function delDoneMission(){
+        PubSub.publish('delDoneMissionMsg')
+    }
     return (
         <div className="todo-footer">
             <label>
