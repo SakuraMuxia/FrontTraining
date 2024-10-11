@@ -1,12 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit"
-import goods from "./slice/goodsSlice"
-import cart from "./slice/cartSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import count from './slice/countSlice'
 
-// 创建仓库对象store
 const store = configureStore({
     reducer: {
-        goods,
-        cart
+        count
     }
 })
 export default store;
