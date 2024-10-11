@@ -1,2 +1,1 @@
-# FrontTraining
-前端练习仓库
+:helicopter:This is a practice and functional testing repository for front-end projects
