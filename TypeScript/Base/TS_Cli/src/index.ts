@@ -5,8 +5,6 @@ enum Gender {
     unknown // 从100依次往下排序
 }
 
-let me: object = {
-    gender: Gender.unknown,
-}
-
-console.log(me); // {gender:101}
+let a: number = undefined;
+let obj: object = null;
+obj = { username: 'atguigu' }
