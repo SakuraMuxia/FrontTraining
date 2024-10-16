@@ -16,7 +16,7 @@ import Loading from "@comps/Loading";
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const NotFound = lazy(() => import("@pages/404"));
-// const HospitalSet = lazy(() => import("@pages/hospital/hospitalSet/HospitalSet"));
+const HospitalSet = lazy(() => import("@pages/hospital/hospitalSet/HospitalSet"));
 
 // 定义load函数：用于懒加载
 const load = (Comp: FC) => {
@@ -58,23 +58,23 @@ const routes: XRoutes = [
                 },
                 element: load(Dashboard),
             },
-            // {
-            //     // 路由路径
-            //     path: "/syt/hospital",
-            //     meta: {
-            //         icon: <ShopOutlined />,
-            //         title: '医院管理'
-            //     },
-            //     children: [
-            //         {
-            //             path: '/syt/hospital/hospitalSet',
-            //             meta: {
-            //                 title: '医院设置'
-            //             },
-            //             element: load(HospitalSet)
-            //         }
-            //     ]
-            // }
+            {
+                // 路由路径
+                path: "/syt/hospital",
+                meta: {
+                    icon: <ShopOutlined />,
+                    title: '医院管理'
+                },
+                children: [
+                    {
+                        path: '/syt/hospital/hospitalSet',
+                        meta: {
+                            title: '医院设置'
+                        },
+                        element: load(HospitalSet)
+                    }
+                ]
+            }
         ],
     },
 

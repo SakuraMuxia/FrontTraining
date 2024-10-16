@@ -15,25 +15,28 @@ export default function HospitalSet() {
             }
         },
         {
-            title: '序号'
+            title: '医院名称',
+            dataIndex: 'hosname'
         },
         {
-            title: '医院名称'
+            title: '医院编号',
+            dataIndex: 'hoscode'
         },
         {
-            title: '医院编号'
+            title: 'api基础路径',
+            dataIndex: 'apiUrl'
         },
         {
-            title: 'api基础路径'
+            title: '签名',
+            dataIndex: 'signKey'
         },
         {
-            title: '签名'
+            title: '联系人姓名',
+            dataIndex: 'contactsName'
         },
         {
-            title: '联系人姓名'
-        },
-        {
-            title: '联系人手机'
+            title: '联系人手机',
+            dataIndex: 'contactsPhone'
         },
         {
             title: '操作',
@@ -56,12 +59,16 @@ export default function HospitalSet() {
     let [hospitalSetList, setHospitalSetList] = useState<IHospitalSetList>([]);
     let [hosname, setHosname] = useState<string>();
     let [hoscode, setHoscode] = useState<string>();
+    // 设置loading状态
+    let [loading,setLoading] = useState<boolean>(false);
     // 定义异步请求
     async function _getHospitalSetList() {
+        setLoading(true);
         let { records, total } = await getHospitalSetList(current, pageSize, hosname, hoscode);
         // 设置状态
         setHospitalSetList(records);
         setTotal(total);
+        setLoading(false);
     }
     // 声明周期 
     useEffect(() => {
@@ -99,6 +106,7 @@ export default function HospitalSet() {
                 rowKey={'id'}
                 columns={columns}
                 dataSource={hospitalSetList}
+                loading={loading}
                 pagination={{
                     current,
                     pageSize,
@@ -109,10 +117,10 @@ export default function HospitalSet() {
                     onChange: (page: number, pageSize: number) => {
                         setCurrent(page);
                         setPageSize(pageSize)
+                        console.log(hospitalSetList)
                     }
                 }}
             />
-
         </Card>
     )
 }
