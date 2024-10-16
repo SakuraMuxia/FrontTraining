@@ -1,10 +1,10 @@
 // import React from 'react'
-import TableTest from "./component/TableTest"
+import FromTest2 from "./component/FromTest2"
 
 export default function App() {
     return (
         <div>
-            <TableTest />
+            <FromTest2 />
         </div>
     )
 }
