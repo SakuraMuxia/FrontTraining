@@ -1,7 +1,7 @@
 // src/routes/index.tsx
 import { lazy, Suspense, FC } from "react";
 import { useRoutes, Navigate } from "react-router-dom";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, ShopOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 // import { Translation } from "react-i18next";
@@ -16,9 +16,9 @@ import Loading from "@comps/Loading";
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const NotFound = lazy(() => import("@pages/404"));
+// const HospitalSet = lazy(() => import("@pages/hospital/hospitalSet/HospitalSet"));
 
-
-
+// 定义load函数：用于懒加载
 const load = (Comp: FC) => {
     return (
         // 因为路由懒加载，组件需要一段网络请求时间才能加载并渲染
@@ -35,6 +35,7 @@ const load = (Comp: FC) => {
 const routes: XRoutes = [
     {
         path: "/",
+        // (带逻辑判断组件:如果登陆过就重定向到当前目录,若未登录重定向到登陆页面)
         element: <EmptyLayout />,
         children: [
             {
@@ -45,6 +46,7 @@ const routes: XRoutes = [
     },
     {
         path: "/syt",
+        // (带逻辑判断组件: 如果登陆过就重定向到dashboard页面, 若未登录重定向到登陆页面)
         element: <Layout />,
         children: [
             {
@@ -55,7 +57,24 @@ const routes: XRoutes = [
                     title: '首页'
                 },
                 element: load(Dashboard),
-            }
+            },
+            // {
+            //     // 路由路径
+            //     path: "/syt/hospital",
+            //     meta: {
+            //         icon: <ShopOutlined />,
+            //         title: '医院管理'
+            //     },
+            //     children: [
+            //         {
+            //             path: '/syt/hospital/hospitalSet',
+            //             meta: {
+            //                 title: '医院设置'
+            //             },
+            //             element: load(HospitalSet)
+            //         }
+            //     ]
+            // }
         ],
     },
 
