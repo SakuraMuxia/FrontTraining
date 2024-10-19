@@ -23,3 +23,17 @@ export interface IHospitalSetListResponse {
     records: IHospitalSetList;
     total: number;
 }
+
+// 添加医院 请求体类型
+export interface IHospitalSetData{
+    apiUrl: string;
+    contactsName: string;
+    contactsPhone: string;
+    hoscode: string;
+    hosname: string;
+}
+
+// 更新医院 请求体类型
+export interface IHospitalSetUpdateData extends IHospitalSetData {
+    id: string;
+}

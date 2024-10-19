@@ -13,10 +13,12 @@ import {
 } from "../layouts";
 import Loading from "@comps/Loading";
 
+// 定义组件
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const NotFound = lazy(() => import("@pages/404"));
 const HospitalSet = lazy(() => import("@pages/hospital/hospitalSet/HospitalSet"));
+const AddOrUpdate = lazy(() => import("@pages/hospital/hospitalSet/components/AddOrUpdate"));
 
 // 定义load函数：用于懒加载
 const load = (Comp: FC) => {
@@ -72,6 +74,22 @@ const routes: XRoutes = [
                             title: '医院设置'
                         },
                         element: load(HospitalSet)
+                    },
+                    {
+                        path: '/syt/hospital/hospitalSet/add',
+                        meta: {
+                            title: '添加医院'
+                        },
+                        hidden:true, // 隐藏菜单栏
+                        element: load(AddOrUpdate)
+                    },
+                    {
+                        path: '/syt/hospital/hospitalSet/edit/:id',
+                        meta: {
+                            title: '编辑医院'
+                        },
+                        hidden: true, // 隐藏菜单栏
+                        element: load(AddOrUpdate)
                     }
                 ]
             }
