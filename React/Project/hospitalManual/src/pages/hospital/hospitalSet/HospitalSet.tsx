@@ -222,7 +222,7 @@ export default function HospitalSet() {
                     onChange: (page: number, pageSize: number) => {
                         setCurrent(page);
                         setPageSize(pageSize)
-                        console.log(hospitalSetList)
+                        
                     }
                 }}
             />
