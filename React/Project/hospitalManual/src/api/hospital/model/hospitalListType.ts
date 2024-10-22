@@ -88,3 +88,47 @@ export interface IDepartmentItem {
 }
 //科室列表类型
 export type IDepartmentList = IDepartmentItem[];
+
+// 请求排班日期分页数据响应结果的类型
+export interface IScheduleResponse {
+    total: number;
+    bookingScheduleList: IBookingScheduleList;
+    baseMap: {
+        hosname: string;
+    }
+}
+// 排班日期每一项的类型
+export interface IBookingScheduleItem {
+    workDate: string;// 排班日期
+    dayOfWeek: string;//星期几
+    docCount: number;// 已预约人数
+    reservedNumber: number;//总预约数
+    availableNumber: number;// 剩余预约数
+}
+// 排班日期列表类型
+export type IBookingScheduleList = IBookingScheduleItem[]
+
+/**
+ * 排班医生对象类型
+ */
+export interface IDoctorItem {
+    id: string;
+    createTime: string;
+    param: {
+        dayOfWeek: string;
+        depname: string;
+        hosname:string;
+    },
+    hoscode:string;
+    depcode: string;
+    title: string;
+    skill: string;
+    workDate: string;
+    reservedNumber: number;
+    availableNumber: number;
+    amount: number;
+    status: number;
+}
+
+//排班医生列表类型
+export type IDoctorList = IDoctorItem[];

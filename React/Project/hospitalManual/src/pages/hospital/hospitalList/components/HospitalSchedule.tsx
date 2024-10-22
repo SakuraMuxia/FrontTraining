@@ -1,5 +1,5 @@
-import { getDepartmentList } from '@/api/hospital/hospitalList'
-import { IDepartmentList } from '@/api/hospital/model/hospitalListType'
+import { getDepartmentList, getDoctorList, getScheduleList } from '@/api/hospital/hospitalList'
+import { IBookingScheduleList, IDepartmentList, IDoctorList } from '@/api/hospital/model/hospitalListType'
 import { Button, Card, Col, Pagination, Row, Table, Tag, Tree } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useEffect, useState } from 'react'
@@ -12,25 +12,36 @@ export default function HospitalSchedule() {
     // 列数据
     const columns: ColumnsType<any> = [
         {
-            title: '序号'
+            title: '序号',
+            render(value:any, row:any, index:number){
+                return (index + 1);
+            }
         },
         {
-            title: '职称'
+            title: '职称',
+            dataIndex:'title'
         },
         {
-            title: '号源时间'
+            title: '号源时间',
+            width:120,
+            dataIndex:'workDate'
         },
         {
-            title: '总预约数'
+            title: '总预约数',
+            dataIndex:'reservedNumber'
         },
         {
-            title: '剩余预约数'
+            title: '剩余预约数',
+            dataIndex:'availableNumber'
+
         },
         {
-            title: '挂号费(元)'
+            title: '挂号费(元)',
+            dataIndex:'amount'
         },
         {
-            title: '擅长技能'
+            title: '擅长技能',
+            dataIndex:'skill'
         }
     ]
 
@@ -40,6 +51,15 @@ export default function HospitalSchedule() {
     let [expandedKeys, setExpandedKeys] = useState<string[]>([]);// 一级科室depcode组成的数组
     let [depname, setDepname] = useState<string>();
     let [depcode, setDepcode] = useState<string>();
+
+    let [current, setCurrent] = useState<number>(1);
+    let [pageSize, setPageSize] = useState<number>(3);
+    let [total, setTotal] = useState<number>(10);
+    let [bookingScheduleList, setBookingScheduleList] = useState<IBookingScheduleList>([]);
+    let [hosname, setHosname] = useState<string>();
+    let [workDate, setWorkDate] = useState<string>();
+    // 医生列表
+    let [doctorList, setDoctorList] = useState<IDoctorList>([]);
     // 方法
     // 获取排班列表数据
     const _getDepartmentList = async()=>{
@@ -62,13 +82,34 @@ export default function HospitalSchedule() {
         setDepname(depname);
         setDepcode(depcode);
     }
+    //获取医院科室 排班日期数据
+    const _getScheduleList = async () => {
+        let { total, bookingScheduleList, baseMap: { hosname } } = await getScheduleList(current, pageSize, hoscode as string, depcode as string);
+        setTotal(total)
+        setBookingScheduleList(bookingScheduleList)
+        setHosname(hosname)
+        // 设置排班日期状态
+        setWorkDate(bookingScheduleList[0].workDate);
+    }
+    // 获取排班医生列表数据
+    const _getDoctorList = async ()=>{
+        let doctorList = await getDoctorList(hoscode as string, depcode as string, workDate as string);
+        // console.log('doctorList: ', doctorList);
+        setDoctorList(doctorList);
+    }
     // 生命周期
     useEffect(()=>{
         hoscode && _getDepartmentList();
     }, [])
+    useEffect(() => {
+        depcode && _getScheduleList();// 获取排班日期分页列表数据
+    }, [depcode, current, pageSize]);
+    useEffect(()=>{// 组件挂载完成之后执行 + workDate变化后执行
+        workDate && _getDoctorList();
+    }, [workDate]);
     return (
         <Card>
-            <div>选择：北京人民医院 / 多发性硬化专科门诊 / 2023-07-28</div>
+            <div>选择：北京人民医院 / {depname} / 2023-07-28</div>
             {/* gutter 栅格间隙 这里组件来自 antd中的栅格组件 */}
             <Row className='mt' gutter={30}>
                 <Col span={5}>
@@ -85,33 +126,42 @@ export default function HospitalSchedule() {
                             expandedKeys={expandedKeys}
                             // （受控）设置选中的树节点
                             selectedKeys={[depcode as string]}
+                            onSelect={(selectedKeys: any,info: any)=>{ // a 是hoscode b是事件对象event
+                                setDepcode(info.node.depcode);
+                                setDepname(info.node.depname);
+                            }}
                         />
                     </div>
                 </Col>
                 <Col span={19}>
-                    <Tag color="green">
-                        <div>2023-07-28 周五</div>
-                        <div>38 / 100</div>
-                    </Tag>
-                    <Tag>
-                        <div>2023-07-28 周五</div>
-                        <div>38 / 100</div>
-                    </Tag>
-                    <Tag>
-                        <div>2023-07-28 周五</div>
-                        <div>38 / 100</div>
-                    </Tag>
+                    {bookingScheduleList.map((item,index)=>(
+                        <Tag 
+                            color={workDate===item.workDate ? 'green':''} 
+                            key={item.workDate}
+                            onClick={()=>{setWorkDate(item.workDate)}}
+                            >
+                                <div>{item.workDate} {item.dayOfWeek}</div>
+                                <div>{item.availableNumber} / {item.reservedNumber}</div>
+                        </Tag>
+                    ))}
 
                     <Pagination
-                        defaultCurrent={6}
-                        total={500}
+                        current={current}
+                        total={total}
                         className='mt'
+                        pageSize={pageSize}
+                        onChange={(page:number, pageSize)=>{
+                            setCurrent(page);
+                            setPageSize(pageSize);
+                        }}
                     />
 
                     <Table
                         className='mt'
                         pagination={false}
                         columns={columns}
+                        dataSource={doctorList}
+                        rowKey={'id'}
                     />
 
                     <Button className='mt'>返回</Button>

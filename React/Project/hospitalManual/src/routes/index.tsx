@@ -1,7 +1,7 @@
 // src/routes/index.tsx
 import { lazy, Suspense, FC } from "react";
 import { useRoutes, Navigate } from "react-router-dom";
-import { HomeOutlined, ShopOutlined } from "@ant-design/icons";
+import { HomeOutlined, ShopOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 // import { Translation } from "react-i18next";
@@ -22,6 +22,7 @@ const AddOrUpdate = lazy(() => import("@pages/hospital/hospitalSet/components/Ad
 const HospitalList = lazy(() => import("@/pages/hospital/hospitalList/HospitalList"));
 const HospitalDetail = lazy(() => import("@/pages/hospital/hospitalList/components/HospitalDetail"));
 const HospitalSchedule = lazy(() => import("@/pages/hospital/hospitalList/components/HospitalSchedule"));
+const Dict = lazy(()=>import("@/pages/cmn/dict/Dict"))
 // 定义load函数：用于懒加载
 const load = (Comp: FC) => {
     return (
@@ -118,8 +119,25 @@ const routes: XRoutes = [
                         element: load(HospitalSchedule)
                     }
                 ]
+            },
+            {
+                path:'/syt/cmn/',
+                meta:{
+                    "title":"数据管理",
+                    "icon":<UnorderedListOutlined />
+                },
+                children:[
+                    {
+                        path:"/syt/cmn/dict",
+                        meta:{
+                            "title":"数据字典"
+                        },
+                        element:load(Dict)
+                    }
+                ]
             }
         ],
+
     },
 
     {
@@ -131,6 +149,7 @@ const routes: XRoutes = [
         path: "*", // 任意路径：除了上面路径以外其他路径
         element: <Navigate to="/404" />,
     },
+    
 ];
 
 /* 
