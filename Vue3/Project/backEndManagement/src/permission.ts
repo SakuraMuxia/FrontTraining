@@ -1,26 +1,31 @@
+// 引入路由器对象:需要在这里路由鉴权(全局守卫)
 import router from '@/router'
+// 引入进度条插件
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import pinia from '@/stores'
-import { useUserInfoStore } from '@/stores/userInfo'
-import { ElMessage } from 'element-plus'
-import getPageTitle from './utils/get-page-title'
-
+// 控制进度条loading效果
 NProgress.configure({ showSpinner: false });
+// 引入pinia仓库:token
+import pinia from '@/stores'
+// 引入用户相关的小仓库
+import { useUserInfoStore } from '@/stores/userInfo'
 const userInfoStore = useUserInfoStore(pinia)
-
+// 消息提示
+import { ElMessage } from 'element-plus'
+// 引入获取标题的函数
+import getPageTitle from './utils/get-page-title'
 
 // 不用进行token检查的白名单路径数组
 const whiteList = ['/login']
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-   // 在显示进度条
-   NProgress.start()
+  // 在显示进度条
+  NProgress.start()
 
-   // 设置整个页面的标题
-   document.title = getPageTitle(to.meta.title as string)
-
+  // 设置整个页面的标题
+  document.title = getPageTitle(to.meta.title as string)
+  // 获取userInfoStore小仓库中的token
   const token = userInfoStore.token
   // 如果token存在(已经登陆或前面登陆过)
   if (token) {
@@ -30,19 +35,19 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else { // 请求的不是登陆路由
-      // 是否已经登陆
+      // 是否有用户信息:用户名是否存在
       const hasLogin = !!userInfoStore.name
-      // 如果已经登陆直接放行
-      if (hasLogin) {
+      if (hasLogin) { // 内存中(pinia)有用户信息=>已经登陆
         next()
-      } else { // 如果还没有登陆
+      } else { // 内存中没有用户信息(没有登陆或刷新了页面)
         try {
-          // 异步请求获取用户信息(包含权限数据) ==> 动态注册用户的权限路由 => 当次跳转不可见
+          // 发送请求获取用户信息
+          // 每次刷新pinia数据清空,重新发送请求获取用户信息
           await userInfoStore.getInfo()
-          next(to) // 重新跳转去目标路由, 能看到动态添加的异步路由, 且不会丢失参数
+          next(to) // 放行
           NProgress.done() // 结束进度条
 
-        } catch (error: any) { // 如果请求处理过程中出错
+        } catch (error: any) { // 获取不到用户信息:(原因:token过期了或其他)
           // 重置用户信息
           await userInfoStore.reset()
           // 提示错误信息
