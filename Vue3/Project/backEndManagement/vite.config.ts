@@ -38,5 +38,15 @@ export default defineConfig((mode: ConfigEnv) => {
         ],
       },
     },
+    // 设置代理服务器
+    server:{
+      proxy:{
+        '/app-dev': {
+        target: 'http://sph-h5-api.atguigu.cn',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/app-dev/, ''),
+      },
+      }
+    }
   };
 });

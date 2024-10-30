@@ -36,6 +36,7 @@ import type { FormInstance } from 'element-plus'
 import { nextTick, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+// 获取用户相关的小仓库
 const userInfoStore = useUserInfoStore()
 const route = useRoute()
 const router = useRouter()
@@ -44,15 +45,19 @@ const loginForm = ref({
   password: '111111'
 })
 const loading = ref(false)
+// 密码表单元素type属性需要响应式数据:默认密码
 const passwordType = ref('password')
 const redirect = ref('')
+// 获取密码选择框的实例
 const passwordRef = ref<HTMLInputElement>()
 const formRef = ref<FormInstance>()
 
 const validateUsername = (rule: any, value: any, callback: any) => {
   if (value.length < 4) {
+    // 提示信息并放行
     callback(new Error('用户名长度不能小于4位'))
   } else {
+    // 放行
     callback()
   }
 }
@@ -69,9 +74,7 @@ const loginRules = {
   password: [{ required: true, trigger: 'blur', validator: validatePassword }]
 }
 
-watch(
-  route,
-  () => {
+watch(route,() => {
     redirect.value = route.query && (route.query.redirect as string)
   },
   { immediate: true }
@@ -86,7 +89,9 @@ const showPwd = () => {
   } else {
     passwordType.value = 'password'
   }
+  // 数据改变时dom立即更新
   nextTick(() => {
+    // ? ts中的语法,当passwordRef.value存在时,执行passwordRef.value.focus(),不存在时不执行
     passwordRef.value?.focus()
   })
 }
@@ -95,11 +100,14 @@ const showPwd = () => {
 点击登陆的回调
 */
 const handleLogin = async () => {
+  // form表单验证通过之后再发送请求
   await formRef.value?.validate()
   loading.value = true
   const { username, password } = loginForm.value
   try {
+    // 用户小仓库执行login方法登陆
     await userInfoStore.login(username, password)
+    // 编程式跳转路由
     router.push({ path: redirect.value || '/' })
   } finally {
     loading.value = false
