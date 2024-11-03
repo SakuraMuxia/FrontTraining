@@ -2,7 +2,7 @@
     <el-card shadow="hover">
         <!-- 顶部按钮 -->
         <el-button type="primary" :icon="Plus" @click="handleAddDialog">添加品牌</el-button>
-        <el-button type="primary" :icon="Download" >导出数据</el-button>
+        <el-button type="primary" :icon="Download" @click="downLoad">导出数据</el-button>
         <!-- 表格 -->
         <el-table :data="tradeMarkList" style="width: 100%;margin:10px 0px" border>
             <el-table-column label="序号" width="90" align="center" type="index"/>
@@ -87,6 +87,7 @@ import { reqAddOrUpdateTradeMark, reqDeleteById, reqTradeMark } from '@/api/prod
 import type {TradeMarkResponseData,Records, TradeMark} from '@/api/product/type/trademark'
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
+import * as XLSX from 'xlsx'
 
 // 表格相关
 const tradeMarkList = ref<Records>([])
@@ -270,6 +271,18 @@ const handleCurrentChange = (val: number) => {
     getTradeMarkList(pageNo.value)
 }
 
+// 导出数据
+const downLoad = () => {
+    // 创建json数据转Excel需要的格式
+    const worksheet = XLSX.utils.json_to_sheet(tradeMarkList.value);
+    // 给Excel创建一个容器
+    const workbook = XLSX.utils.book_new();
+    // 把数据追加到Excel容器中
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
+    // 导出数据:第二个参数是文件名
+    XLSX.writeFile(workbook, "Presidents.xlsx")
+
+}
 </script>
 
 <style scoped>
