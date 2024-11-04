@@ -1,5 +1,6 @@
 // vue3提供的createApp函数:用于创建应用(app)
 import { createApp } from 'vue'
+const app = createApp(App)
 // pinia仓库
 import pinia from './stores'
 // vue3中的PC端的组件库 element-plus
@@ -19,8 +20,12 @@ import ElSvg from './components/SvgIcon/ElSvg'
 
 // 路由鉴权
 import './permission'
-// 
-const app = createApp(App)
+
+//引入分类全局组件
+import Category from '@/components/Category/index.vue';
+//第一个参数:全局的名字 第二个参数:组件
+app.component('Category', Category);
+
 // 把 element-plus 阿里图标全部注册为全局组件
 ElSvg(app)
 // 注册大仓库
