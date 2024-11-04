@@ -16,8 +16,9 @@
                                     style="margin: 5px"
                                     v-for="(item, index) in row.attrValueList"
                                     :key="item.id"
-                                    type="warning"
-                                    >{{ item.valueName }}</el-tag>
+                                    :type="item.id %2 ==0 ? 'primary':'warning'"
+                                    >{{ item.valueName }}
+                                </el-tag>
                             </template>
                         </el-table-column>
                         <el-table-column label="操作" width="120px">
@@ -26,7 +27,8 @@
                                     type="warning"
                                     size="small"
                                     :icon="Edit"
-                                    ></el-button>
+                                    >
+                                </el-button>
                                 <el-popconfirm
                                     :title="`你确定要删除${row.attrName}`"
                                     width="250px"
