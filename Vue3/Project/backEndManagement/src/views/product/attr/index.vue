@@ -27,11 +27,13 @@
                                     type="warning"
                                     size="small"
                                     :icon="Edit"
+                                    @click="updateAttr(row)"
                                     >
                                 </el-button>
                                 <el-popconfirm
                                     :title="`你确定要删除${row.attrName}`"
                                     width="250px"
+                                    @confirm="deleteAttr(row.id)"
                                     >
                                     <template #reference>
                                         <el-button type="danger" size="small" :icon="Delete"></el-button>
@@ -107,12 +109,13 @@
 </template>
 
 <script setup lang='ts'>
-import { reqAddOrUpdateAttr, reqAttrList } from "@/api/product/attr";
+import { reqAddOrUpdateAttr, reqAttrList, reqDeleteAttr } from "@/api/product/attr";
 import type { AttrResponseData,Attr, AttrValue } from "@/api/product/type/attr";
 import useCategoryStore from "@/stores/category";
 import { Plus, Edit, Delete } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { watch, ref, reactive, nextTick } from "vue";
+import cloneDeep from 'lodash/cloneDeep'
 
 // 属性列表
 const attrList = ref<AttrResponseData>([])
@@ -261,6 +264,14 @@ const toEdit = (row: AttrValue) => {
     });
 };
 
+// 更新已有属性
+const updateAttr = (row:Attr) =>{
+    // 获取当前点击行对象,使用lodash插件中的函数,深拷贝
+    Object.assign(attrParams, cloneDeep(row));
+    // 切换场景为1
+    scene.value = 1
+}
+
 //删除已有的属性
 const deleteAttr = async (id: number) => {
     try {
@@ -274,7 +285,7 @@ const deleteAttr = async (id: number) => {
         //再次获取最新剩下全部属性
         getAttrList();
     } catch (error) {
-
+        console.log(error)
     }
 }
 

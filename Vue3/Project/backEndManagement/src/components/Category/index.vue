@@ -3,21 +3,21 @@
         <!-- 设置行内 -->
         <el-form :inline="true">
             <el-form-item label="一级分类">
-                <el-select v-model="categoryStore.c1Id" @change="handleChangeC1" :disabled="scene==0?false:true" style="width: 180px">
+                <el-select v-model="categoryStore.c1Id" @change="handleChangeC1" :disabled="scene==0?false:true" style="width: 200px">
                     <!-- option:label 决定用户展示的选项 -->
                     <el-option :key="c1.id" v-for="(c1,index) in categoryStore.c1Arr" :label="c1.name" :value="c1.id"/>
                 </el-select>
             </el-form-item>
             
             <el-form-item label="二级分类">
-                <el-select v-model="categoryStore.c2Id" @change="handleChangeC2" :disabled="scene==0?false:true" style="width: 180px">
+                <el-select v-model="categoryStore.c2Id" @change="handleChangeC2" :disabled="scene==0?false:true" style="width: 200px">
                     <!-- option:label 决定用户展示的选项 -->
                     <el-option :key="c2.id" v-for="(c2,index) in categoryStore.c2Arr" :label="c2.name" :value="c2.id"/>
                 </el-select>
             </el-form-item>
 
             <el-form-item label="三级分类">
-                <el-select v-model="categoryStore.c3Id" :disabled="scene==0?false:true" style="width: 180px">
+                <el-select v-model="categoryStore.c3Id" :disabled="scene==0?false:true" style="width: 200px">
                     <!-- option:label 决定用户展示的选项 -->
                     <el-option :key="c3.id" v-for="(c3,index) in categoryStore.c3Arr" :label="c3.name" :value="c3.id"/>
                 </el-select>
