@@ -14,7 +14,7 @@
                 </el-button>
 
                 <!-- 表格展示已有的SPU -->
-                <el-table border style="margin: 10px 0px" :data="spuList">
+                <el-table border style="margin: 10px 0px" :data="spuList" v-if="spuList.length">
                     <el-table-column
                         type="index"
                         label="序号"
@@ -63,7 +63,10 @@
                         </template>
                     </el-table-column>
                 </el-table>
-
+                <!-- 分割线 -->
+                <el-divider content-position="center" v-else>
+                    <span style="color: aqua">暂无数据</span>
+                </el-divider>
                 <!-- 分页器 -->
                 <el-pagination
                     v-model:current-page="pageNo"
