@@ -4,12 +4,14 @@
         <Category :scene="scene"></Category>
         <!-- 展示已有的SPU -->
         <el-card style="margin: 10px 0px">
-            <div v-show="scene == 0">
+            <!-- SPU table -->
+            <div v-show="scene === 0">
 
                 <!-- 添加按钮 -->
                 <el-button
                     type="primary"
                     :icon="Plus"
+                    @click="addSpu"
                     :disabled="categoryStore.c3Id ? false : true">添加SPU
                 </el-button>
 
@@ -46,6 +48,7 @@
                                 :icon="Edit"
                                 type="warning"
                                 size="small"
+                                @click="updateSpu(row)"
                                 title="修改SPU">
                             </el-button>
                             <el-button
@@ -79,23 +82,30 @@
                     @size-change="SizeChange"
                 />
             </div>
+            <!-- spu form -->
+            <SpuForm ref="spu" @changeScene="changescene" v-show="scene === 1"></SpuForm>
+            
         </el-card>
     </div>
 </template>
 
 <script setup lang='ts'>
+import SpuForm from './spuForm/index.vue'
+
 import { ref, watch } from "vue";
 import { Plus, Edit, Delete, InfoFilled,StarFilled  } from "@element-plus/icons-vue";
-import type {Records, SpuListResponseData} from "@/api/product/type/spu"
+import type {SpuObjArr,SpuObj, SpuListResponseData} from "@/api/product/type/spu"
 import useCategoryStore from "@/stores/category"
 import { reqSpuList } from "@/api/product/spu";
 
+//获取子组件spuForm
+const spu = ref<any>();
 //分类需要的场景的数值
 const scene = ref<number>(0);
 //小仓库
 const categoryStore = useCategoryStore();
 //全部已有的SPU
-const spuList = ref<Records>([])
+const spuList = ref<SpuObjArr>([])
 //spu总个数
 const total = ref<number>(0)
 //分页器当前页码
@@ -127,6 +137,26 @@ const SizeChange = (value: number) => {
     pageSize.value = value;
     getHasSpuList();
 }
+
+// 添加SPU
+const addSpu = ()=>{
+    //点击切换场景为1 (添加新的SPU|更新已有的SPU)
+    scene.value = 1;
+}
+
+// 更新SPU
+const updateSpu = (row:SpuObj) =>{
+    // 切换场景
+    scene.value = 1;
+    // 通过ref对象调用子组件中的方法,并给子组件传参
+    spu.value.initSpuObj(row)
+}
+
+// 改变场景scene
+const changescene = (val:number) =>{
+    scene.value = val
+}
+
 
 </script>
 
