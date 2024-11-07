@@ -154,7 +154,17 @@ const updateSpu = (row:SpuObj) =>{
 
 // 改变场景scene
 const changescene = (val:number) =>{
+    // 修改scene的值
     scene.value = val
+    //更新添加或者更新留在当前页或者第一页
+    getHasSpuList()
+    // if (val.flag == "add") {
+    //     //添加
+    //     getHasSpuList();
+    // } else {
+    //     //更新
+    //     getHasSpuList(pageNo.value);
+    // }
 }
 
 

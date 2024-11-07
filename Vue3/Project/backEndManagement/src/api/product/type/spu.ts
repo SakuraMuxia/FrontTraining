@@ -5,8 +5,8 @@ export interface SpuObj {
     spuName: string,//SPU的名字
     description: string,//SPU的描述
     tmId: number|string,//品牌的ID
-    spuImageList?:null,//已有的SPU照片墙的数据(目前不知道数据类型)
-    spuSaleAttrList?:null,//已有的SPU销售属性的数据(目前不知道数据类型)
+    spuImageList?:ImageArr,//已有的SPU照片墙的数据(目前不知道数据类型)
+    spuSaleAttrList?:SaleAttrArr,//已有的SPU销售属性的数据(目前不知道数据类型)
 }
 
 //存储已有的SPU(数组)
@@ -35,10 +35,8 @@ export type TradeMarkArr = TradeMarkObj[];
 export interface ImgObj{
     id?:number,
     spuId?:number,
-
-    imgName?:string,
-    imgUrl?:string,
-
+    imgName:string,
+    imgUrl:string,
     name?:string,
     url?:string,
 }
@@ -53,7 +51,7 @@ export interface SaleAttrValueObj{
     baseSaleAttrId:number,
     saleAttrValueName:string,
     saleAttrName?:string,
-    isChecked:null
+    isChecked?:null
 }
     // 销售属性值数组类型
 export type SaleAttrValueArr = SaleAttrValueObj[];
@@ -61,10 +59,11 @@ export type SaleAttrValueArr = SaleAttrValueObj[];
 export interface SaleAttrObj{
     id?:number,
     spuId?:number,
-    baseSaleAttrId?:number,
+    baseSaleAttrId?:number|string,
     saleAttrName?:string,
     spuSaleAttrValueList?:SaleAttrValueArr ,
     showInput?:boolean,
+    saleAttrValueNameInp?:string
 }
     // 销售属性数组类型
 export type SaleAttrArr =SaleAttrObj[]
