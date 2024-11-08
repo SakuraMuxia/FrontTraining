@@ -115,8 +115,6 @@ const spuParamsObj = reactive<SpuObj>({
 
 // 品牌数据
 const tradeMarkList = ref<TradeMarkArr>([]);
-// 照片墙数据
-const imageList = ref<ImageArr>([])
 // 照片墙数据 (用于element渲染)
 const imageListForEle = ref<any>([])
 // 控制照片对话框的显示与隐藏
@@ -135,6 +133,7 @@ const SaleAttrNameNoHasSelectStr = ref<string>("")
 // 销售属性属性名数组(目前销售属性未拥有的数组) 计算属性 
 const SaleAttrNameNoHasList = computed(() => {
 	const result = SaleAttrNameList.value.filter((item) => {
+		// 从SaleAttrNameList数组中过滤出SaleAttrList中没有的
 		return SaleAttrList.value.every((obj) => {
 			return item.name != obj.saleAttrName;
 		})
@@ -152,7 +151,7 @@ const cancel = () => {
 }
 
 // 编辑SPU函数 接收父组件的参数,存储getHasSpuList请求的响应数据(不完整),然后再发其他请求获取全部数据
-const initSpuObj = async (row: SpuObj) => {
+const initDataForEditSpu = async (row: SpuObj) => {
 	// 使用对象深拷贝给spuParamsObj赋值
 	Object.assign(spuParamsObj, cloneDeep(row));
 	//获取全部品牌的数据
@@ -165,8 +164,6 @@ const initSpuObj = async (row: SpuObj) => {
 	const result3:SaleAttrNameArr  = await reqBaseSale();
 	// 存储品牌数组
 	tradeMarkList.value = result
-	// 存储照片墙数组
-	imageList.value = result1
 	// element渲染的照片做专门处理
 	imageListForEle.value = result1.map((item) => {
 		return {
@@ -178,6 +175,20 @@ const initSpuObj = async (row: SpuObj) => {
 	SaleAttrList.value = result2
 	// 存储销售属性属性名称数组
 	SaleAttrNameList.value = result3
+}
+
+// 新增SPU函数
+const initDataForAddSpu = async (c3Id:string| number) =>{
+	// 清空表单数据
+	reset()
+	// 收集三级分类id
+	spuParamsObj.category3Id = c3Id
+	// 收集品牌数据
+	const result:TradeMarkArr = await reqAllTradeMark()
+	// 收集销售属性
+	const result1:SaleAttrNameArr = await reqBaseSale()
+	tradeMarkList.value = result
+	SaleAttrNameList.value = result1
 }
 
 // 提交按钮
@@ -194,9 +205,27 @@ const save = async () =>{
 			message: spuParamsObj.id ? "更新成功" : "添加成功",
     	});
 		// 切换场景为 spu table展示数据
-		$emits("changeScene",0)
+		$emits("changeScene",0,spuParamsObj.id ? 'update':'add')
 	}).catch((err)=>{
 		console.log(err)
+	})
+}
+
+// 重置表单
+const reset = () =>{
+	// 清空照片墙
+	imageListForEle.value = []
+	// 清空销售属性
+	SaleAttrList.value = []
+	// 清空请求体数据
+	Object.assign(spuParamsObj,{
+		category3Id: "",
+		spuName: "",
+		description: "",
+		tmId: "",
+		spuImageList: [],
+		spuSaleAttrList: [],
+		id:''
 	})
 }
 
@@ -217,15 +246,14 @@ const handleSaleAttr = () =>{
 // 处理照片墙的上传和合并到请求体
 const handleImageUpload = () =>{
 
-	// 遍历imageListForEle,并把imageListForEle中对象的url地址更改,最后赋值给imageList
-	imageList.value = imageListForEle.value?.map((item:any)=>{
+	// 遍历imageListForEle,并把imageListForEle中对象的url地址更改,最后赋值给spuParamsObj.spuImageList
+	const imageTemp = imageListForEle.value?.map((item:any)=>{
 		return {
 			imgName:item.name,
 			imgUrl:(item.response && item.response.data) || item.url
 		}
 	})
-	// 把照片墙数组 imageList 追加到 spuParamsObj 中
-	spuParamsObj.spuImageList = imageList.value
+	spuParamsObj.spuImageList = imageTemp
 }
 
 // 新增销售属性方法
@@ -296,8 +324,8 @@ const toLook = (row:SaleAttrObj)=>{
 
 // 暴漏数据
 defineExpose({
-	initSpuObj,
-
+	initDataForEditSpu,
+	initDataForAddSpu
 });
 
 </script>

@@ -15,7 +15,8 @@ export interface Attr {
     attrName: string,
     categoryId: number|string,
     categoryLevel: number|string,
-    attrValueList: AttrValueList
+    attrValueList: AttrValueList,
+    attrNameIdAndValueIdTmp?:string
 }
 
 // 属性列表类型

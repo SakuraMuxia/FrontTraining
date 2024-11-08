@@ -1,6 +1,6 @@
 //SPU管理模块的接口
 import request from '@/utils/request';
-import type {ImageArr, SaleAttrArr, SaleAttrNameArr, SpuListResponseData, SpuObj, TradeMarkArr} from '@/api/product/type/spu'
+import type {ImageArr, SaleAttrArr, SaleAttrNameArr, skuArr, skuParamsObj, SpuListResponseData, SpuObj, TradeMarkArr} from '@/api/product/type/spu'
 
 
 enum API {
@@ -18,8 +18,12 @@ enum API {
     ADDSPU_URL = "/admin/product/saveSpuInfo",
     //更新已有的SPU接口
     UPDATESPU_URL = "/admin/product/updateSpuInfo",
-    //删除已有的SPU
-    DELETESPU_URL="/admin/product/deleteSpu/"
+    // 删除已有的SPU
+    DELETESPU_URL="/admin/product/deleteSpu/",
+    // 添加一个SKU
+    ADDSKU_URL="/admin/product/saveSkuInfo",
+    // 获取某一个SPU旗下全部SKU商品
+    FINDSKU_URL="/admin/product/findBySpuId/",
 }
 
 // 获取SPU列表数据
@@ -52,3 +56,9 @@ export const reqAddOrUpdateSpu = (data: SpuObj) => {
         return request.post(API.ADDSPU_URL, data);
     }
 }
+// 添加sku接口
+export const reqAddSku = (data:skuParamsObj)=>request.post<any,any>(API.ADDSKU_URL,data);
+// 获取某品牌的sku
+export const reqSkuList = (spuId:number)=>request.get<any,skuArr>(API.FINDSKU_URL+spuId);
+// 删除已有的SPU
+export const reqDeleteSpu = (spuId:number)=>request.delete(API.DELETESPU_URL+spuId);

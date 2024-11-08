@@ -39,6 +39,7 @@ export interface ImgObj{
     imgUrl:string,
     name?:string,
     url?:string,
+    isDefault?:boolean
 }
 
 export type ImageArr = ImgObj[];
@@ -64,6 +65,7 @@ export interface SaleAttrObj{
     spuSaleAttrValueList?:SaleAttrValueArr ,
     showInput?:boolean,
     saleAttrValueNameInp?:string
+    saleNameIdAndValueIdTmp?:string
 }
     // 销售属性数组类型
 export type SaleAttrArr =SaleAttrObj[]
@@ -74,3 +76,52 @@ export interface SaleAttrNameObj{
     name:string
 }
 export type SaleAttrNameArr =SaleAttrNameObj[];
+
+/*********************添加sku类型**********************/
+
+
+export interface skuAttrValue{
+    attrId:string|number,
+    attrValueId:string|number
+}
+export type skuAttrValueList = skuAttrValue[]
+
+export interface skuSaleAttrValue{
+    saleAttrId:number|string,
+    saleAttrValueId:number|string
+}
+export type skuSaleAttrValueList = skuSaleAttrValue[]
+
+export interface skuParamsObj{
+    category3Id:string|number,
+    spuId: string|number,
+    tmId: string|number,
+    skuName: string,
+    price: string|number,
+    weight: string|number,
+    skuDesc: string,
+    skuDefaultImg: string,
+    skuAttrValueList:skuAttrValueList,
+    skuSaleAttrValueList:skuSaleAttrValueList,
+
+}
+/*****************************************************/
+
+/*********************查看sku类型**********************/
+export interface skuElement{
+    id?:number,
+    spuId?:number,
+    price:number,
+    skuName:string,
+    skuDesc:string,
+    weight:string,
+    tmId:number,
+    category3Id:number,
+    skuDefaultImg:string,
+    isSale?:number,
+    skuImageList?:null,
+    skuAttrValueList?:null,
+    skuSaleAttrValueList?:null
+}
+export type skuArr = skuElement[]
+/*****************************************************/
