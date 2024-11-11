@@ -235,5 +235,8 @@ const changesceneForsku = (val:number) =>{
 
 </script>
 
-<style scoped lang="less">
+<style scoped >
+::v-deep(.el-button.is-disabled){
+    background-color: orange !important;
+}
 </style>
