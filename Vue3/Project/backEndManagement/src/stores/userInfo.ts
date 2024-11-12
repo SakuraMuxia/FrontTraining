@@ -18,12 +18,15 @@ import type {LoginResponseData, UserInfoResponseData} from '@/api/user/type/inde
  */
 export const useUserInfoStore = defineStore('userInfo', {
 
-  state: (): UserInfoState => ({
-    token: getToken() as string,
-    name: '',
-    avatar: '',
-    menuRoutes: []
-  }),
+  state: (): UserInfoState => {
+    return {
+      token: getToken() as string,
+      name: '',
+      avatar: '',
+      menuRoutes: [],
+      buttons:[]
+    }
+  },
 
   actions: {
     // 登陆
@@ -48,6 +51,8 @@ export const useUserInfoStore = defineStore('userInfo', {
       // 设置小仓库中的数据状态
       this.name = result.name
       this.avatar = result.avatar
+      //存储当前用户拥有哪些按钮权限标识 ['btn.模块的名字.xxxx']
+      this.buttons = result.buttons;
       // 设置用户的路由
       this.menuRoutes = staticRoutes
     },

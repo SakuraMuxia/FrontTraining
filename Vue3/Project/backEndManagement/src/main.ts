@@ -23,9 +23,11 @@ import './permission'
 
 //引入分类全局组件
 import Category from '@/components/Category/index.vue';
+import {has} from '@/utils/directive';
 //第一个参数:全局的名字 第二个参数:组件
 app.component('Category', Category);
-
+//引入自定义指令文件函数
+has(app);
 // 把 element-plus 阿里图标全部注册为全局组件
 ElSvg(app)
 // 注册大仓库

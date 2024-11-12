@@ -12,6 +12,7 @@
                     type="primary"
                     :icon="Plus"
                     @click="addSpu"
+                    v-has="'btn.Spu.add'"
                     :disabled="categoryStore.c3Id ? false : true">添加SPU
                 </el-button>
 
