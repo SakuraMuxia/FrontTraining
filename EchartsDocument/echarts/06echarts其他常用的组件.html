@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入echarts依赖包 -->
+    <script src="./js/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .app {
+            width: 700px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 呈现图形图标的区域:务必要有高度 -->
+    <div class="app"></div>
+</body>
+
+</html>
+<script>
+    //初始化一个echarts实例
+    const mycharts = echarts.init(document.querySelector('.app'));
+    //准备一个配置对象
+    let options = {
+        title: {
+            text: '其他组件'
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {},
+        //图例组件
+        legend: {
+            left: 0,
+            //方向的设置
+            orient: 'vertical',
+            //图标距离
+            itemGap: 20
+        },
+        series: [
+            {
+                name: '柱状图',
+                type: 'bar',
+                data: [10, 20, 30, 40, 50, 60]
+            },
+            {
+                name: '折线图',
+                type: 'line',
+                data: [33, 77, 22, 13, 66, 93]
+            },
+            {
+                name: '散点图',
+                type: 'scatter',
+                data: [10, 44, 33, 22, 11, 23, 2, 44, 37, 99, 77, 555, 444]
+            }
+        ],
+        //提示框组件
+        tooltip: {
+            textStyle: {
+                color: 'red'
+            },
+            //背景颜色
+            backgroundColor: 'rgba(0,0,0,.3)'
+        },
+        //区域缩放组件
+        dataZoom: {},
+        //工具栏组件
+        toolbox: {
+            show: true,
+            feature: {
+
+                dataView: {
+                    readOnly: false
+                },
+                magicType: {
+                    type: ["line", "bar"]
+                },
+                restore: {},
+                saveAsImage: {},
+                dataZoom: {
+                    yAxisIndex: "none"
+                },
+            }
+        }
+    }
+    //通过echarts类的实力setOption方法设置配置对象
+    mycharts.setOption(options);
+</script>

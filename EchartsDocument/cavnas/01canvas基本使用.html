@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 双闭合标签:拥有默认宽度与高度 300 * 150 -->
+    <!-- 浏览器认为canvas标签相当于图片img -->
+    <!-- canvas标签的w|h不能用样式去设置 -->
+    <canvas width="600" height="400"></canvas>
+</body>
+
+</html>
+<script>
+    //canvas:是HTML5中新增的语义化标签(双标签),可以利用JS在canvas标签上
+    //绘制图形
+
+    const canvas = document.querySelector('canvas');
+    //获取上下文---操作画布的'笔'
+    const ctx = canvas.getContext('2d');
+    //绘制矩形:x,y,w,h [零零点在左上角]
+    ctx.fillStyle = "rgb(199,88,34)";
+    ctx.fillRect(100, 50, 50, 300);
+    ctx.fillRect(160, 200, 50, 150);
+    ctx.fillRect(220, 90, 50, 260);
+    ctx.fillRect(280, 240, 50, 110);
+    ctx.font = '20px 微软雅黑'
+    //绘制文字
+    ctx.fillText('数据可视化',100,200)
+</script>

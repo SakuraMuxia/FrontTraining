@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入echarts依赖包 -->
+    <script src="./js/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .app {
+            width: 700px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 呈现图形图标的区域:务必要有高度 -->
+    <div class="app"></div>
+</body>
+
+</html>
+<script>
+    //初始化一个echarts实例
+    const mycharts = echarts.init(document.querySelector('.app'));
+    //准备一个配置对象
+    let options = {
+        //标题组件
+        title: {
+            text: '柱状图',//标题内容
+            link: 'http://www.sina.com',//超链接的设置
+            textStyle: {
+                color: '#2b2b2b',
+                fontWeight: 900,
+                textBorderColor: 'cyan',
+                textBorderWidth: 1,
+                textBorderType: 'dashed'
+            },
+            subtext: '副标题',
+            //副标题与主标题距离设置
+            itemGap: 20,
+            left: 'center',//位置的调试
+        },
+        xAxis: {
+            //x轴图形图标均匀分布
+            type: 'category',
+            //x轴的名称
+            name: '中国军事',
+            //轴的位置
+            nameLocation: 'center',
+            //轴名称与轴线距离
+            nameGap: 25,
+            //最小数值
+            min: 0,
+            max: 6,
+            //x轴的轴线设置
+            axisLine: {
+                symbol: ['none', 'arrow'],
+                symbolSize: [15, 15],
+                symbolOffset: [15, 18],
+                lineStyle: {
+                    //轴线的颜色
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'red' // 0% 处的颜色
+                        }, {
+                            offset: 1, color: 'blue' // 100% 处的颜色
+                        }],
+                        global: false // 缺省为 false
+                    },
+                    type: 'dashed',
+                    width: 1
+                }
+            },
+            //刻度
+            axisTick: {
+
+                lineStyle: {
+                    color: 'red'
+                }
+            }
+        },
+        yAxis: {
+            //轴线
+            axisLine: {
+                show: true
+            },
+            //分割线
+            splitLine: {
+                show: false,
+                lineStyle: {
+                    color: ['red', 'orange', 'yellow'],
+                    width: 10
+                }
+            },
+            //刻度
+            axisTick: {
+                show: true
+            },
+            type: 'value'
+        },
+        series: {
+            type: "bar",
+            data: [11, 88, 44, 32, 81],
+            //柱条的背景颜色的设置
+            showBackground: true,
+            backgroundStyle: {
+                color: "#3c3c3c"
+            },
+            //图形的文字标签
+            label: {
+                show: true,
+                rotate: 15,
+                //文字位置
+                position: 'top'
+            },
+            //柱条样式设置
+            itemStyle: {
+                borderWidth: 3,
+                borderColor: 'red',
+                borderType: 'dotted',
+                color: (params) => {
+                    const arr = ['red', 'orange', 'yellow', 'green', 'cyan']
+                    return arr[params.dataIndex]
+                },
+            },
+            //柱条的宽度
+            barWidth: 30
+        }
+    };
+    //通过echarts类的实力setOption方法设置配置对象
+    mycharts.setOption(options);
+</script>

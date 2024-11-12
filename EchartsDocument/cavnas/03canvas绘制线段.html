@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 双闭合标签:拥有默认宽度与高度 300 * 150 -->
+    <!-- 浏览器认为canvas标签相当于图片img -->
+    <!-- canvas标签的w|h不能用样式去设置 -->
+    <canvas width="600" height="400"></canvas>
+</body>
+
+</html>
+<script>
+    //canvas:是HTML5中新增的语义化标签(双标签),可以利用JS在canvas标签上
+    //绘制图形
+    //1弧度约等于57.4°
+    const canvas = document.querySelector('canvas');
+    //获取上下文---操作画布的'笔'
+    const ctx = canvas.getContext('2d');
+
+    //开始绘制线段
+    // ctx.beginPath();
+    // //线段起点
+    // ctx.moveTo(100,100);
+    // //线段其他点的位置
+    // ctx.lineTo(200,200);
+    // ctx.lineTo(300,50);
+    // ctx.lineWidth=20;
+    // ctx.strokeStyle = 'red';
+    // ctx.stroke();
+
+    canvas.onmousedown = (event) => {
+        ctx.beginPath();
+        ctx.moveTo(event.offsetX, event.offsetY);
+        canvas.onmousemove = (event) => {
+            ctx.strokeStyle = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+            ctx.lineWidth = 10;
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+        }
+    }
+    canvas.onmouseup = function () {
+        canvas.onmousemove = null;
+        //清除画布的方法 xywh
+        ctx.clearRect(0,0,100,100);
+    }
+</script>

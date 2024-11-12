@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入echarts依赖包 -->
+    <script src="./js/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .app {
+            width: 600px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 呈现图形图标的区域:务必要有高度 -->
+    <div class="app"></div>
+</body>
+
+</html>
+<script>
+    //初始化一个echarts实例
+    const mycharts = echarts.init(document.querySelector('.app'));
+    //准备一个配置对象
+    let options = {
+        //图形图标的标题:组件
+        title: {
+            text: '柱状图',//主标题的内容
+            left: "center",//标题位置
+            textStyle: {
+                color: 'red'
+            }
+        },
+        //x轴组件
+        xAxis: {
+            axisLine: {
+                show: true
+            },
+            type: 'category'
+        },
+        //y轴组件
+        yAxis: {
+            axisLine: {
+                show: true
+            },
+
+        },
+        //系列组件
+        series: {
+            //图形图标的类型
+            type: 'bar',//bar,pie,line......
+            //图形图标需要展示的数据
+            data: [10, 20, 30, 40, 50]
+        }
+    };
+    //通过echarts类的实力setOption方法设置配置对象
+    mycharts.setOption(options);
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 双闭合标签:拥有默认宽度与高度 300 * 150 -->
+    <!-- 浏览器认为canvas标签相当于图片img -->
+    <!-- canvas标签的w|h不能用样式去设置 -->
+    <canvas width="600" height="400"></canvas>
+</body>
+
+</html>
+<script>
+    //canvas:是HTML5中新增的语义化标签(双标签),可以利用JS在canvas标签上
+    //绘制图形
+    //1弧度约等于57.4°
+    const canvas = document.querySelector('canvas');
+    //获取上下文---操作画布的'笔'
+    const ctx = canvas.getContext('2d');
+
+    for (var i = 0; i < 100; i++) {
+        //绘制弧;
+        ctx.beginPath();
+        //x,y,r,起始的弧度,结束的弧度,true:逆时针、false:顺时针
+        ctx.arc(300, 200, 2 * i, 0, 2 * Math.PI, true);
+        //调试线宽度
+        ctx.lineWidth = 1;
+        //调试线的颜色
+        ctx.strokeStyle = 'red'
+        //开始绘制出图形
+        ctx.stroke();
+    }
+</script>
