@@ -10,6 +10,7 @@ const router = createRouter({
   history: createWebHistory(),
   // 路由对象 staticRoutes 是一个数组 
   routes: staticRoutes,
+  // 滚动行为
   scrollBehavior() {
     return { top: 0, left: 0 }
   },
