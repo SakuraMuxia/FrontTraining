@@ -1,0 +1,67 @@
+.home{
+    width: 100%;
+    height: 100%;
+}
+.home .swiper{
+    width: 750rpx;
+    height: 350rpx;
+}
+.home .swiper .image{
+    width: 750rpx;
+    height: 350rpx;
+}
+.home .category{
+    display: flex;
+    flex-wrap: wrap;
+}
+.home .category .category-item{
+    width: 146rpx;
+    width: 146rpx;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color: #b7d9eb;
+    border: 2rpx solid #ccc;
+}
+.home .category .category-item .category-image{
+    width: 80rpx;
+    height: 80rpx;
+}
+.home .category .category-item .category-title{
+    font-size: 30rpx;
+}
+
+.home .good{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* 两端的间距是中间的一半 */
+}
+.home .good .good-item{
+    width: 320rpx;
+    margin-top: 20rpx;
+    border: solid 2rpx #ccc;
+}
+.home .good .good-item .good-item-img{
+    width: 320rpx;
+    height: 320rpx;
+}
+.home .good .good-item .good-item-title{
+    font-size: 30rpx;
+    display: -webkit-box;       /* 创建弹性盒子 */
+    -webkit-box-orient: vertical; /* 设置方向为垂直 */
+    overflow: hidden;           /* 隐藏超出的内容 */
+    text-overflow: ellipsis;    /* 超出部分用省略号 */
+    -webkit-line-clamp: 2;      /* 限制显示的行数 */
+    word-wrap: break-word;      /* 单词折行 */
+}
+/* 固定定位到右下角 */
+.home .totop{
+    position: fixed; /* 固定定位 */
+    right: 30rpx;
+    bottom: 100rpx;
+}
+.home .totop .totop-img{
+    width: 80rpx;
+    height: 80rpx;
+}

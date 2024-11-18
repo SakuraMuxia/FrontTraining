@@ -1,0 +1,96 @@
+<view class="home">
+    <!-- 轮播图 -->
+    <swiper class="swiper" 	indicator-dots 	indicator-color="#dbdbdb" 	indicator-active-color="#d81e06" autoplay circular>
+        <swiper-item>
+            <image class="image" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118150656.png" mode="aspectFill"/>
+        </swiper-item>
+        <swiper-item>
+            <image class="image" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118150656.png" mode="aspectFill"/>
+        </swiper-item>
+        <swiper-item>
+            <image class="image" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118150656.png" mode="aspectFill"/>
+        </swiper-item>
+    </swiper>
+    <!-- 分类 -->
+    <view class="category">
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-duankouduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">多媒体</text>
+        </view>
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-huandengpianpptyanshiduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">PPT</text>
+        </view>
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-jiangtaijiaocheng.png" mode="aspectFill"/>
+            <text class="category-title">讲台</text>
+        </view>    
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-tupianzhaopian.png" mode="aspectFill"/>
+            <text class="category-title">照片</text>
+        </view>     
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-zhaoxiangjizhaopianpaisheduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">视频</text>
+        </view>    
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-duankouduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">多媒体</text>
+        </view>     
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-huandengpianpptyanshiduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">PPT</text>
+        </view>
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-jiangtaijiaocheng.png" mode="aspectFill"/>
+            <text class="category-title">讲台</text>
+        </view>
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-tupianzhaopian.png" mode="aspectFill"/>
+            <text class="category-title">照片</text>
+        </view>    
+        <view class="category-item">
+            <image class="category-image" src="/static/category/a-zhaoxiangjizhaopianpaisheduomeiti.png" mode="aspectFill"/>
+            <text class="category-title">视频</text>
+        </view>
+    </view>
+    <!-- 商品列表 -->
+    <view class="good">
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118104045.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118155049.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118104045.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118155049.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118104045.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118155049.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118104045.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+        <view class="good-item">
+            <image class="good-item-img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118155049.png" mode="aspectFill"/>
+            <text class="good-item-title" >樱井雪乃，用日语写作是さくらい ゆきの，罗马音表示为Yukino Sakurai。这位角色以其独特的魅力在动漫界吸引了不少粉丝，她的配音员是柚木凉香，为我们带来生动的</text>
+        </view>
+    </view>
+    <!-- 回到顶部 -->
+    <view class="totop">
+        <image wx:if="{{showtopBtn}}" bind:tap="toTop" class="totop-img" src="/static/category/toTop.png" mode="aspectFill"/>
+    </view>
+</view>

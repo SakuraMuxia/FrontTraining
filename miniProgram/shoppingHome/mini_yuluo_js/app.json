@@ -1,0 +1,37 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/user/user",
+        "pages/shopcart/shopcart"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#2980B9",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "结城sakana"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "/static/tabbar/shouye1.png",
+                "selectedIconPath": "/static/tabbar/shouye.png"
+            },
+            {
+                "pagePath": "pages/shopcart/shopcart",
+                "text": "购物车",
+                "iconPath": "/static/tabbar/shopcart1.png",
+                "selectedIconPath": "/static/tabbar/shopcart.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "个人中心",
+                "iconPath": "/static/tabbar/user1.png",
+                "selectedIconPath": "/static/tabbar/user.png"
+            }
+        ],
+        "color": "#2980B9",
+        "selectedColor": "d81e06",
+        "backgroundColor": "#ccc"
+    }
+}

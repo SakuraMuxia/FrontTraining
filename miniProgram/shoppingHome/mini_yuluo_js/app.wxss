@@ -1,0 +1,6 @@
+/**iconfont.wxss全局样式,全部的页面可以使用图标**/
+@import "/static/iconfont.wxss";
+page{
+    width: 100%;
+    height: 100%;
+}
