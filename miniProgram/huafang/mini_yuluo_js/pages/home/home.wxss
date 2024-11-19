@@ -1,0 +1,61 @@
+/* pages/home/home.wxss */
+.home {
+    width: 750rpx;
+}
+.home .swiper{
+    width: 750rpx;
+    height: 300rpx; 
+ }
+ .home .swiper .banner{
+    width: 750rpx;
+    height: 300rpx;
+}
+/* 分类 */
+.cate{
+    flex-wrap: wrap;
+    margin-top: 10rpx;
+}
+.cate .cate-img{
+    width: 88rpx;
+    height: 88rpx;
+}
+.cate .cate-item{
+    width: 150rpx;
+    justify-content: center;
+    align-items: center;
+    margin: 10rpx 0rpx;
+}
+.cate .cate-item .cate-text{
+    font-size: 30rpx;
+    margin: 10rpx 0rpx;
+}
+.cate .bottom .cate-img{
+    width: 40rpx;
+    height: 40rpx;
+}
+.cate .bottom .cate-text{
+    font-size: 28rpx;
+    margin: 10rpx 0rpx;
+}
+/* logo */
+.home .logo{
+    width: 750rpx;
+}
+/* 猜你喜欢 */
+.home .footer{
+    width: 750rpx;
+    background:#bfbfbf;
+}
+.home .footer .like{
+    text-align: center;
+    font-size: 40rpx;
+    font-weight: 900;
+    margin-top: 10rpx;
+}
+.home .footer .more{
+    border-radius: 20rpx;
+    text-align: center;
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 30rpx;
+}

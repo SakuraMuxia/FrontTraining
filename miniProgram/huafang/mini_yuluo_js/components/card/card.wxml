@@ -1,0 +1,16 @@
+<!--components/card/card.wxml-->
+<view class="card">
+    <!-- 卡片组件:item 即为展示商品 -->
+    <view class="item" wx:for="{{list}}" wx:key="id">
+        <image src="{{item.imageUrl}}" class="image" />
+        <view class="title">{{item.name}}</view>
+        <view class="subtitle">{{item.packing}}</view>
+        <view class="bottom">
+            <view class="price">{{item.price}}</view>
+            <view class="right">
+                <view class="money">{{item.marketPrice}}</view>
+                <image src="https://img02.hua.com/m/home/img/home_buy_btn.png" class="cart" />
+            </view>
+        </view>
+    </view>
+</view>

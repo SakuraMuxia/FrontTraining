@@ -1,0 +1,68 @@
+/* pages/category/category.wxss */
+.category {
+    width: 100%;
+    height: 100%;
+}
+.category .left {
+    width: 180rpx;
+    height: 100%;
+}
+.category .left .scroll {
+    width: 180rpx;
+    height: 100%;
+    background-color: #cdcdcd;
+}
+.category .left .scroll .item {
+    display: block;
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 26rpx;
+}
+.category .left .scroll .item .select{
+    position: absolute;
+    color: orange;
+    font-weight: 700;
+    left: 2rpx;
+}
+.category .left .scroll .item .img{
+    height: 40rpx;
+    width: 40rpx;
+    vertical-align:middle
+}
+.category .left .scroll .active {
+    background-color: white;
+    color: rgb(36, 37, 34);
+    font-weight: 600;
+}
+.category .right {
+    flex: 1;
+    height: 100%;
+}
+.category .right .title {
+    text-align: center;
+    font-weight: 900;
+    color: rgb(3, 3, 3);
+    margin: 10rpx 0rpx;
+}
+.category .right .box{
+    display: flex;
+    flex-wrap: wrap;
+}
+.category .right .box .item{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10rpx 0rpx;
+}
+.category .right .box .item .img {
+    width: 70rpx;
+    height: 70rpx;
+}
+.category .right .box .item .title {
+    font-size: 30rpx;
+    color: rgb(182, 98, 20);
+    margin: 10rpx 0rpx;
+}

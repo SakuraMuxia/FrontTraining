@@ -1,0 +1,48 @@
+/* components/card/card.wxss */
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card .item {
+    width: 360rpx;
+    background: white;
+    margin: 10rpx 0rpx;
+    border-radius: 30rpx;
+}
+.card .item .title{
+    font-weight: 900;
+    font-size: 26rpx;
+}
+.card .item .image {
+    width: 360rpx;
+    height: 360rpx;
+    border-radius: 40rpx;
+}
+.card .item .subtitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    font-size: 24rpx;
+    margin: 10rpx 0rpx;
+    height: 60rpx;
+}
+.card .item .bottom{
+    display: flex;
+    justify-content: space-around;
+}
+.card .item .bottom .right{
+    display: flex;
+    justify-content: space-between;
+}
+.card .item .cart {
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: 20rpx;
+}
+.card .item .bottom .right .money{
+    color: #ccc;
+    text-decoration: line-through;
+}

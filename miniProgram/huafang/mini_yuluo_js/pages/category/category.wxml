@@ -1,0 +1,23 @@
+<!--pages/category/category.wxml-->
+<view class="category flex">
+    <view class="left">
+        <!-- 滚动视图 -->
+        <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+            <view data-index="{{index}}" bind:tap="changeActive" class="item {{index===active&&'active'}}" wx:for="{{50}}" wx:key="{{index}}">
+                <text class="select" wx:if="{{index==active}}">|</text>
+                <image wx:if="{{index < 2}}" class="img" src="/static/category/hot.png" mode=""/>
+                <text>生命周期</text>
+            </view>
+        </scroll-view>
+        
+    </view>
+    <view class="right">
+       <view class="title">香气护体</view>
+       <view class="box">
+         <view class="item" wx:for="{{11}}">
+           <image class="img" src="https://2216847528.oss-cn-beijing.aliyuncs.com/asset/20241118104045.png"/>
+           <text class="title">123</text>
+         </view>
+       </view>
+    </view>
+</view>
