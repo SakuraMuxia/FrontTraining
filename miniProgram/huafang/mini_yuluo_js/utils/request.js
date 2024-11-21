@@ -8,6 +8,14 @@ export default (params) => {
         wx.showLoading({
             title: '加载....',
         });
+        // 获取token信息
+        const token = wx.getStorageSync('TOKEN');
+        // 定义请求头
+        let header = {};
+        // 如果token存在,添加请求头
+        if (token) {
+            header.token = token;
+        }
         // 发请求
         wx.request({
             //请求URL----绝对路径
@@ -16,6 +24,8 @@ export default (params) => {
             method: params.method || "GET",
             //携带请求体
             data: params.data || {},
+            // 携带请求头
+            header,
             //成功回调
             //res即为服务器响应数据
             success(res) {

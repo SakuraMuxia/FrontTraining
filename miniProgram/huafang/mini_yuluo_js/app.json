@@ -1,16 +1,18 @@
 {
-  "entryPagePath": "pages/home/home",
+  "entryPagePath": "pages/my/my",
   "window": {
-    "navigationBarBackgroundColor": "#2980B9",
+    "navigationBarBackgroundColor": "#3cc",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "结城sakana"
+    "navigationBarTitleText": "雨落辰潇"
   },
   "pages": [
     "pages/category/category",
     "pages/shopcart/shopcart",
     "pages/home/home",
     "pages/my/my",
-    "components/card/card"
+    "components/card/card",
+    "pages/edit/edit",
+    "pages/login/login"
   ],
   "tabBar": {
     "list": [

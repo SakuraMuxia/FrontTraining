@@ -1,3 +1,5 @@
+import { reqSort } from "../../api/index"
+
 // pages/category/category.js
 Page({
 
@@ -20,7 +22,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        //获取分类的功能函数
+        this.getData();
+    },
+    
+    // 获取分类项目的数据
+    async getData(){
+        const res = await reqSort();
+        if(res.code === 200){
+            this.setData({
+                sortArr:res.data
+            })
+        }
     },
 
     /**

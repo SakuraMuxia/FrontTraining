@@ -1,0 +1,46 @@
+/* pages/edit/edit.wxss */
+.edit {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+
+.edit .avatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 140rpx;
+    padding: 0rpx;
+}
+
+.edit .avatar .img {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 30rpx;
+    border-radius: 50rpx;
+}
+.edit .avatar .text{
+    font-size: 30rpx;
+    margin-left: 30rpx;
+}
+.edit .nickname{
+    display: flex;
+    height: 140rpx;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10rpx;
+}
+.edit .nickname .text{
+    font-size: 30rpx;
+    margin-left: 30rpx;
+}
+.edit .nickname input{
+    font-size: 30rpx;
+    margin-left: 30rpx;
+}
+.edit .footer{
+    margin-top: 80rpx;
+    display: flex;
+    justify-content: space-around;
+}

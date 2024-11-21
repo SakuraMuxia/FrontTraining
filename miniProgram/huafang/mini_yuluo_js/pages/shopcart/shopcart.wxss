@@ -1,1 +1,21 @@
 /* pages/shopcart/shopcart.wxss */
+.shopcart{
+    width: 750rpx;
+    height: 100%;
+}
+.shopcart .scroll{
+    display: flex;
+    height: 80rpx;
+    background-color: antiquewhite;
+}
+.shopcart .scroll .item{
+    width: 80rpx;
+    /* 伸缩项目不等比缩小 */
+    flex-shrink:0;
+    line-height: 80rpx;
+    text-align: center;
+}
+.shopcart .scroll .active{
+    background-color: white;
+    font-weight: 700;
+}

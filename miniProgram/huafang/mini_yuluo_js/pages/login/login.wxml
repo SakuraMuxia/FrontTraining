@@ -1,0 +1,6 @@
+<!--pages/login/login.wxml-->
+<van-empty description="点击下方按钮,授权登录您的账户"
+    image="network"
+    >
+    <van-button round type="primary" bind:click="goLogin">轻触登陆</van-button>
+</van-empty>

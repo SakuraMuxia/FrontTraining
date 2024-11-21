@@ -1,0 +1,18 @@
+<!--pages/edit/edit.wxml-->
+<view class="edit">
+    <!-- 展示用户头像 -->
+    <button class="avatar" open-type="chooseAvatar" bindchooseavatar="chooseAvatar">
+        <text class="text">头像:</text>
+        <image src="{{headimgurl}}" class="img" />
+    </button>
+    <!-- 展示微信用户昵称 -->
+    <view class="nickname">
+        <text class="text">昵称:</text>
+        <input type="nickname" placeholder="请你输入昵称" model:value="{{nickname}}"/>
+    </view>
+    <!-- 底部按钮 -->
+    <view class="footer">
+        <van-button icon="revoke" round size="normal" type="info">取消</van-button>
+        <van-button icon="certificate" round size="normal" type="primary" bind:tap="updateUser">确定</van-button>
+    </view>
+</view>
