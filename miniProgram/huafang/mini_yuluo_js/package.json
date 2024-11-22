@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@vant/weapp": "^1.11.7"
+    "@vant/weapp": "^1.11.7",
+    "lodash.debounce": "^4.0.8"
   }
 }

@@ -58,7 +58,12 @@ Page({
             })
         }
     },
-
+    //查看更多按钮进入商品列表的页面
+    findGoods(){
+        wx.navigateTo({
+            url: '/pages/goods/goods',
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

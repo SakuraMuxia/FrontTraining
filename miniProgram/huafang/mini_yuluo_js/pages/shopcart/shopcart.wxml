@@ -1,12 +1,69 @@
-<!--pages/shopcart/shopcart.wxml-->
-<view class="shopcart">
-    <!-- 分类横向排列 -->
-    <scroll-view class="scroll" enable-flex scroll-x scroll-into-view="a{{activeNum}}" scroll-with-animation>
-        <view class="item {{ index == activeNum && 'active'}}" 
-            bind:tap="changeActive"
-            id="a{{index}}"
-            data-index="{{index}}"
-            wx:for="{{50}}" wx:key="{{index}}">阿夸
+<view class="container cart_list_container">
+    <!-- 购物车列表 -->
+    <view class="cart_list" wx:if="{{cartList.length>0}}">
+        <view class="cart_item flex" wx:for="{{cartList}}" wx:key="goodsId">
+            <!-- 左侧选项卡 -->
+            <view class="check">
+                <van-checkbox 
+                    data-goodsId="{{item.goodsId}}" 
+                    checked-color="red" 
+                    value="{{item.isChecked}}" 
+                    bind:change="updateChecked">
+                </van-checkbox>
+            </view>
+            <!-- 中间商品图 -->
+            <view class="shop_img">
+                <image class="img" src="{{item.imageUrl}}"></image>
+            </view>
+            <!-- 右侧商品信息 -->
+            <view class="shop_info flex">
+                <view class="title">{{item.name}}</view>
+                <view class="buy flex">
+                    <view class="price">￥{{item.price}}</view>
+                    <view class="buy_btn flex">
+                        <!-- 删除按钮 -->
+                        <van-icon 
+                            bind:tap="deleteGood" 
+                            size="18px" 
+                            color="#71797f" 
+                            name="delete" 
+                            class="del" 
+                            data-goodsid="{{item.goodsId}}" 
+                        />
+                        <!-- 显示商品数量的组件:计数器 -->
+                        <van-stepper 
+                            data-goodsid="{{item.goodsId}}"
+                            data-oldvalue="{{item.count}}" 
+                            value="{{item.count}}" 
+                            bind:change="updateCount" 
+                        />
+                    </view>
+                </view>
+            </view>
         </view>
-    </scroll-view>
+    </view>
+    <!-- 空的购物车 -->
+    <van-empty description="还没有添加商品，快去添加吧～" wx:else />
+    <!-- 底部结算 -->
+    <view class="submit_footer flex">
+        <view class="check">
+            <van-checkbox checked-color="{{selectAll?'red':'#ccc'}}" value="{{selectAll}}">全选</van-checkbox>
+        </view>
+
+        <view class="right flex">
+            <view class="total-wrapper">
+                <text>合计：</text>
+                <text class="total-price">¥ {{total}}</text>
+            </view>
+            <view class="total-count">
+                <van-button 
+                    bind:tap="goOrder" 
+                    size="small" 
+                    color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))" 
+                    round>去结算({{totalCount}})
+                </van-button>
+            </view>
+        </view>
+    </view>
+
 </view>

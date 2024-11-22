@@ -35,6 +35,15 @@ Page({
             })
         }
     },
+    // 点击右侧分类进入对应商品列表
+    findGoods(event){
+        //获取点击的二级分类的商品的id
+        // console.log(event); // event对象 是 当前点击对象
+        // 路由跳转到商品列表
+        wx.navigateTo({
+            url: `/pages/goods/goods?category2Id=${event.currentTarget.dataset.category2id}`,
+        })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "card": "/components/card/card",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-empty": "@vant/weapp/empty/index"
+    },
+    "navigationBarTitleText": "商品列表"
+}

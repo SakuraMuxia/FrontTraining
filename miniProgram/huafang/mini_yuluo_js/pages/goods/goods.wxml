@@ -1,0 +1,13 @@
+<!--pages/goods/goods.wxml-->
+<view class="goods">
+    <card list="{{goodList}}" wx:if="{{goodList.length>0}}" />
+    <van-empty wx:if="{{goodArr.length==0}}" ></van-empty>
+    <!-- 分割线 -->
+    <van-divider 
+        contentPosition="center" 
+        fontSize="16" 
+        borderColor="#3cc" 
+        wx:if="{{flag==='nomore'}}"
+        textColor="#3cc">没有更多了
+    </van-divider>
+</view>

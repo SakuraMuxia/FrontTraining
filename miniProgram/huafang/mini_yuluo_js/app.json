@@ -12,7 +12,8 @@
     "pages/my/my",
     "components/card/card",
     "pages/edit/edit",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/goods/goods"
   ],
   "tabBar": {
     "list": [

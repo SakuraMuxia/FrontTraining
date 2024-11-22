@@ -45,3 +45,30 @@ export const reqUpdateInfo = (data) => request({
     method: 'post',
     data
 });
+
+// 获取商品列表
+export const reqGoodsList = (page, limit, category2Id) =>{
+    return request({
+        url: `/mall-api/goods/list/${page}/${limit}?category2Id=${category2Id}`
+    })
+}
+
+//获取用户购物车的数据
+export const reqCart = () => request({
+    url: `/mall-api/cart/getCartList`
+})
+
+//更新用户的商品的勾选的状态
+export const reqUpdateChecked = (goodsId, isChecked) => request({
+    url: `/mall-api/cart/checkCart/${goodsId}/${isChecked}`
+})
+
+//删除商品
+export const reqDeleteGood = (goodsId) => request({
+    url: `/mall-api/cart/delete/${goodsId}`
+})
+
+//此接口可以加入购物车|修改购物车某一个商品的数量
+export const reqAddOrUpdateCart = (goodsId, count, blessing) => request({
+    url: `/mall-api/cart/addToCart/${goodsId}/${count}?blessing=${blessing}`
+})

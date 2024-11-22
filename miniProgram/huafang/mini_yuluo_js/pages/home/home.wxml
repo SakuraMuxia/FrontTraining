@@ -22,9 +22,9 @@
         <!-- 引入组件 -->
         <!-- 页面给组件传递参数:属性-类似于vue的props 不写 ":" -->
         <card list="{{likeArr}}"></card>
-        <button class="more">查看更多</button>
+        <button class="more" bind:tap="findGoods">查看更多</button>
         <view class="like">热门推荐</view>
         <card list="{{hotArr}}"></card>
-        <button class="more">查看更多</button>
+        <button class="more" bind:tap="findGoods">查看更多</button>
     </view>
 </view>

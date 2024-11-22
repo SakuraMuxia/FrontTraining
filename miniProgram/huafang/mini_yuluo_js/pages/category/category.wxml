@@ -20,6 +20,7 @@
        <view class="box">
          <view class="item" wx:for="{{sortArr[active].children}}" 
             wx:key="id"
+            bind:tap="findGoods"
             data-category2id="{{item.id}}" >
            <image class="img" 
            src="{{item.imageUrl}}"/>
