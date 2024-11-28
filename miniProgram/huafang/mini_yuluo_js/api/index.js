@@ -47,7 +47,7 @@ export const reqUpdateInfo = (data) => request({
 });
 
 // 获取商品列表
-export const reqGoodsList = (page, limit, category2Id) =>{
+export const reqGoodsList = (page, limit, category2Id) => {
     return request({
         url: `/mall-api/goods/list/${page}/${limit}?category2Id=${category2Id}`
     })
@@ -71,4 +71,61 @@ export const reqDeleteGood = (goodsId) => request({
 //此接口可以加入购物车|修改购物车某一个商品的数量
 export const reqAddOrUpdateCart = (goodsId, count, blessing) => request({
     url: `/mall-api/cart/addToCart/${goodsId}/${count}?blessing=${blessing}`
+})
+
+// 获取商品详情的接口api
+export const reqGoodsDetail = (goodsId) => request({
+    url: `/mall-api/goods/${goodsId}`
+})
+
+//获取订单详情页-立即购买的商品的信息
+export const reqBuyNowGoodsInfo = (goodsId, blessing) => request({
+    url: `/mall-api/order/buy/${goodsId}?blessing=${blessing}`
+})
+
+//获取订单收货人地址信息
+export const reqAdress = () => request({
+    url: `/mall-api/userAddress/getOrderAddress`
+})
+
+// 新增收货人
+export const reqAddAddress = (data) => request({
+    url: `/mall-api/userAddress/save`,
+    method: 'post',
+    data
+});
+// 获取地址列表的数据
+export const reqAddressList = () => request({
+    url: `/mall-api/userAddress/findUserAddress`
+})
+
+// 获取某个用户地址数据接口
+export const reqEditAddress = (id) => request({
+    url: `/mall-api/userAddress/${id}`
+})
+
+//更新已有的地址
+export const reqUpdateAddress = (data) => request({
+    url: `/mall-api/userAddress/update`,
+    method:'POST',
+    data
+})
+//删除某个用户的地址信息
+export const reqDeleteUser = (id)=>request({url:`/mall-api/userAddress/delete/${id}`});
+
+//提交订单的接口
+export const reqSubmit = (data) => request({
+    url: `/mall-api/order/submitOrder`,
+    method: "POST",
+    data
+})
+
+//获取支付参数接口
+export const reqPayInfo = (orderNo) => request({
+    url: `/mall-api/webChat/createJsapi/${orderNo}`
+});
+
+//支付结果的查询
+export const reqPayStatus = (orderNo) => request({
+    url: `/mall-api/webChat/queryPayStatus/${orderNo}`
 })

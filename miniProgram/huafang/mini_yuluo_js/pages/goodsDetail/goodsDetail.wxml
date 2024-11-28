@@ -1,0 +1,78 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<view class="good_detail_container">
+    <!-- 商品大图 -->
+    <view class="banner_img">
+        <image class="img" src="{{goods.imageUrl}}" mode="aspectFit"></image>
+    </view>
+    <!-- 商品info -->
+    <view class="good_info">
+        <view class="price">
+            <view class="price_num">￥ {{goods.price}}</view>
+            <view class="price_origin_num">￥ {{goods.marketPrice}}</view>
+        </view>
+        <view class="title">{{goods.name}}</view>
+        <view class="desc">{{goods.packing}}</view>
+    </view>
+    <!-- 商品详情 -->
+    <view class="good_detail">
+        <image class="img"  wx:for="{{goods.detailList}}" wx:key="index" src="{{item}}" mode="aspectFit" ></image>
+    </view>
+    <!-- 底部选项区域 -->
+    <view class="good_footer flex">
+        <view class="bottom_left flex">
+            <!-- 声明式导航:点击图标跳转首页  open-type跳转方式:默认navigate-->
+            <navigator url="/pages/home/home" open-type="reLaunch">
+                <view class="icon_wrap flex">
+                    <van-icon name="wap-home" color="#666" size="22px"></van-icon>
+                    <text>首页</text>
+                </view>
+            </navigator>
+            <!-- 声明式导航:点击图标跳转购物车 -->
+            <navigator url="/pages/shopcart/shopcart" open-type="reLaunch">
+                <view class="icon_wrap flex">
+                    <van-icon name="shopping-cart" color="#666" size="22px"></van-icon>
+                    <text>购物车</text>
+                </view>
+            </navigator>
+        </view>
+        <view class="bottom_right flex">
+            <view class="add_shop_cart" bind:tap="addCartHandle">加入购物车</view>
+            <view class="buy_now"  bind:tap="buynowHandle">立即购买</view>
+        </view>
+    </view>
+    <!--弹窗区域 -->
+    <!-- show:控制动作面板显示与隐藏布尔值 -->
+    <van-action-sheet show="{{showSheet}}" bind:click-overlay="overPlay">
+        <!-- 动作面板内部展示商品内容 -->
+        <view class="sheet_wrapper">
+            <!-- 商品信息 -->
+            <view class="goods_item flex">
+                <image class="img mid" src="{{goods.imageUrl}}"></image>
+                <view class="info flex">
+                <view class="title">{{goods.name}}</view>
+                <view class="buy">
+                    <view class="price">
+                        <view class="symbol">￥</view>
+                        <view class="num">{{goods.price}}</view>
+                    </view>
+                    <!-- 立即购买的时候不显示数量添加 -->
+                    <view wx:if="{{type==='cart'}}" class="buy-btn" style="minWidth:400rpx;">
+                        <van-stepper value="{{skuNum}}" bind:change="skuNumChange"/>
+                    </view>
+                </view>  
+            </view>
+        </view>
+            <!-- 祝福语 -->
+            <view class="time-wraper">
+                <view class="title">祝福语</view>
+                <textarea  model:value="{{remarks}}" class="form-textarea" placeholder="必填，写上您的祝福语，给心爱的他（她）送上你的祝福（请勿填写特殊符号或表情符号）" name="textarea" />
+            </view>
+            <!-- 确定按钮 -->
+            <view class="sheet-footer-btn">
+                <van-button block type="primary" round bind:tap="confirm">确定</van-button>
+            </view>
+        </view>
+    </van-action-sheet>
+</view>
+<!-- 请提示组件 -->
+<van-toast id="van-toast" />

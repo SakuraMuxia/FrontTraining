@@ -1,10 +1,9 @@
 // pages/shopcart/shopcart.js
-import {reqCart} from '../../api/index'
+import {reqCart,reqUpdateChecked,reqAddOrUpdateCart,reqDeleteGood} from '../../api/index'
 import Dialog from '@vant/weapp/dialog/dialog';
 import debounce from 'lodash.debounce'
 
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -12,11 +11,11 @@ Page({
         // 购物车商品列表
         cartList:[], //存储购物车的数据
         selectAll:false,//全选的状态
-        total:123, //计算商品的总价
-        totalCount:4 //计算结算商品的总个数
+        total:0, //计算商品的总价
+        totalCount:0 //计算结算商品的总个数
     },
     //页面首次加载完成:获取一次购物车数据
-    onShow() {
+    onShow(){
         //添加访问购物车登录判断--token
         const token = wx.getStorageSync('TOKEN');
         if(token){
@@ -24,7 +23,7 @@ Page({
         }else{
             //未登录用户去登录页
             wx.navigateTo({
-              url: '/pages/login/login',
+                url: '/pages/login/login',
             })
         }
     },
@@ -74,11 +73,35 @@ Page({
     //计算全选状态
     computedAllSelect() {
         //数组的length务必大于零个
-        const checked = this.data.cartList.every(good => good.isChecked == 1) && this.data.cartArr.length > 0;
+        const checked = this.data.cartList.every(good => good.isChecked == 1) && this.data.cartList.length > 0;
         //更新响应式数据
         this.setData({
             selectAll: checked
         })
+    },
+    // 全选勾选handle函数
+    selectAllHandle(event){
+        this.setData({
+            selectAll:!event.target.dataset.selectstatus
+        })
+        if(this.data.selectAll){
+            const newArr = this.data.cartList.map(good =>{
+                good.isChecked = 1
+                return good
+            })
+            this.setData({
+                cartList:newArr
+            })
+        }else{
+            const newArr1 = this.data.cartList.map(good =>{
+                good.isChecked = 0
+                return good
+            })
+            this.setData({
+                cartList:newArr1
+            })
+        }
+        
     },
     //商品的勾选状态的更新回调
     async updateChecked(event) { // event 指向当前 行对象
@@ -100,6 +123,7 @@ Page({
     deleteGood(event) {
         //删除商品的ID
         const goodsId = event.currentTarget.dataset.goodsid;
+        // console.log(goodsId)
         Dialog.confirm({
             title: '删除商品'
         }).then(async () => {
@@ -116,7 +140,7 @@ Page({
     //点击+-文本框只要文本发生变化就会触发
     // 使用lodash的 debounce 方法 实现防抖
     updateCount: debounce(async function (event) { // event代表当前行对象
-        //修改商品的id
+        // 获取商品的id
         const goodsId = event.currentTarget.dataset.goodsid;
         // 计算差值
         const oldValue = event.currentTarget.dataset.oldvalue;
@@ -130,59 +154,10 @@ Page({
             this.getUserCart();
         }
     },300),
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad(options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage() {
-
+    // 结算按钮回调
+    goOrder(){
+        wx.navigateTo({
+            url: '/pages/order/order',
+        })
     }
 })

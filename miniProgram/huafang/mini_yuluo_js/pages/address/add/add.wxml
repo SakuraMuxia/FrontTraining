@@ -1,0 +1,28 @@
+<view class="container address-detail">
+    <form class="form-content">
+        <van-cell-group>
+            <!-- 收件人 -->
+            <van-field placeholder="收件人" label-class="filed-label" model:value="{{ name }}" label="收货人" />
+            <!-- 手机号 -->
+            <van-field placeholder="手机号" label-class="filed-label" model:value="{{ phone }}" label="手机号" maxlength="11" />
+            <!-- 微信小程序自带的组件,并非vant -->
+            <picker mode="region" bindchange="selectCity">
+                <van-field label-class="filed-label" label="地址" value="{{region}}" placeholder="省/市/区" />
+            </picker>
+            <van-field label-class="filed-label" model:value="{{ address }}" label="详细地址" placeholder="门牌号等(例如:10栋1001号)" />
+            <van-cell title="标签" title-width="94px">
+                <van-radio-group model:value="{{ tagName }}" direction="horizontal">
+                    <van-radio name="家">家</van-radio>
+                    <van-radio name="公司">公司</van-radio>
+                </van-radio-group>
+            </van-cell>
+            <van-cell title="是否设置为默认地址">
+                <switch checked="{{isDefault}}" bindchange="handler" />
+            </van-cell>
+
+        </van-cell-group>
+    </form>
+    <view class="footer-btn">
+        <van-button block type="primary" round bind:tap="save">保存</van-button>
+    </view>
+</view>

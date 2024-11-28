@@ -47,7 +47,7 @@
     <!-- 底部结算 -->
     <view class="submit_footer flex">
         <view class="check">
-            <van-checkbox checked-color="{{selectAll?'red':'#ccc'}}" value="{{selectAll}}">全选</van-checkbox>
+            <van-checkbox bind:tap="selectAllHandle" data-selectStatus="{{selectAll}}" checked-color="{{selectAll?'red':'#ccc'}}" value="{{selectAll}}">全选</van-checkbox>
         </view>
 
         <view class="right flex">
@@ -65,5 +65,6 @@
             </view>
         </view>
     </view>
-
+    <!-- 提示框组件 -->
+    <van-dialog id="van-dialog" />
 </view>

@@ -1,7 +1,7 @@
 <!--components/card/card.wxml-->
 <view class="card">
     <!-- 卡片组件:item 即为展示商品 -->
-    <view class="item" wx:for="{{list}}" wx:key="id">
+    <view class="item" wx:for="{{list}}" wx:key="id" bind:tap="goDetetail"  data-goodsid="{{item.id}}" >
         <image src="{{item.imageUrl}}" class="image" />
         <view class="title">{{item.name}}</view>
         <view class="subtitle">{{item.packing}}</view>
