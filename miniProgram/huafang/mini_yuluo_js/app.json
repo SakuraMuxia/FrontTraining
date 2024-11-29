@@ -15,9 +15,7 @@
         "pages/goods/goods",
         "pages/goodsDetail/goodsDetail",
         "pages/order/order",
-        "pages/order/paySuccess/paysuccess",
-        "pages/address/address",
-        "pages/address/add/add"
+        "pages/order/paySuccess/paysuccess"
     ],
     "tabBar": {
         "list": [
@@ -48,5 +46,14 @@
         ],
         "color": "#bfbfbf",
         "selectedColor": "#2c2c2c"
-    }
+    },
+    "subPackages": [
+        {
+            "root": "packageA",
+            "pages": [
+                "pages/address/address",
+                "pages/address/add/add"
+            ]
+        }
+    ]
 }

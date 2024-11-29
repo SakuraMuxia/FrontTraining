@@ -3,12 +3,12 @@
     <!-- 地址管理 -->
     <view class="address_card">
         <!-- 用户没有默认地址 -->
-        <navigator wx:if="{{!userAddress.name}}" class="flex nav" hover-class="navigator-hover" url="/pages/address/address" >
+        <navigator wx:if="{{!userAddress.name}}" class="flex nav" hover-class="navigator-hover" url="/packageA/pages/address/address" >
             <van-icon size="22px" name="add" />
             <view class="title_text">添加收货人地址</view>
         </navigator>
         <!-- 用户有默认地址，显示默认地址 -->
-        <navigator wx:else class="flex nav nav_address" hover-class="navigator-hover" url="/pages/address/address">
+        <navigator wx:else class="flex nav nav_address" hover-class="navigator-hover" url="/packageA/pages/address/address">
             <view class="address_content">
                 <view class="address_title">{{userAddress.fullAddress}}</view>
                 <view class="address_full">{{userAddress.tagName}}</view>
