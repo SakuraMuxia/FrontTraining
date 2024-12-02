@@ -1,9 +1,9 @@
 <template>
     <view class="box">
-        <view class="item" v-for="(item, index) in list" :key="item.id"">
-            <image class="img" :src="type == 'course' ? item.cover : item.avatar" mode="widthFix" />
+        <view class="item" v-for="(item, index) in list" :key="item.id" @click="goCourseDetial(item.id)">
+            <image class="img" :src="type === 'course' ? item.cover : item.avatar" mode="widthFix" />
             <!-- 课程的结构 -->
-            <view v-if="type == 'course'">
+            <view v-if="type === 'course'">
                 <view class="title">{{ item.title }}</view>
                 <view class="study">已有{{ item.viewCount }}学习</view>
                 <view class="footer">
@@ -23,6 +23,16 @@
 <script setup lang='ts'>
 // 接收父组件传递的 列表数据
 const props = defineProps(["list", "type"]);
+
+//点击课程进入课程详情页
+const goCourseDetial = (id: string) => {
+    if (props.type == "course") {
+        //跳转课程详情页-->携带id
+        uni.navigateTo({
+            url: `/pages/course/detail/detail?courseId=${id}`,
+        })
+    }
+}
 </script>
 
 <style scoped lang="less">

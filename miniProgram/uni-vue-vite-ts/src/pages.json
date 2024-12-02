@@ -17,6 +17,30 @@
 			"style": {
 				"navigationBarTitleText": "个人中心"
 			}
+		},
+		{
+			"path": "pages/course/detail/detail",
+			"style": {
+				"navigationBarTitleText": "课程详情"
+			}
+		},
+		{
+			"path": "pages/course/learning/learning",
+			"style": {
+				"navigationBarTitleText": "课程学习"
+			}
+		},
+		{
+			"path": "pages/course/comments/comments",
+			"style": {
+				"navigationBarTitleText": "学员评价"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登陆"
+			}
 		}
 	],
 	"globalStyle": {
@@ -46,6 +70,11 @@
 				"selectedIconPath":"/static/images/tabbar/home-on.png"
 			}
 		]
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
 	}
-	
 }
