@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 // 文件路径
-const fileAPath = path.resolve(__dirname, "textSrc", "file5.txt");
-const fileBPath = path.resolve(__dirname, "textSrc", "file6.txt");
-const outputPath = path.resolve(__dirname, "textSrc", "com.txt");
+const fileAPath = path.resolve(__dirname, "textSrc", "file7.txt");
+const fileBPath = path.resolve(__dirname, "textSrc", "file8.txt");
+const outputPath = path.resolve(__dirname, "textSrc", "com8.txt");
 
 // 读取文件内容
 function readFileContent(filePath) {

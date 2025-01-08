@@ -38,8 +38,8 @@ function compareFilesIgnoreOrder(filePath1, filePath2) {
 }
 
 // 设置文件路径为当前目录下的 textSrc 子目录内的文件
-const filePath1 = path.resolve(__dirname, "textSrc", "file5.txt");
-const filePath2 = path.resolve(__dirname, "textSrc", "file6.txt");
+const filePath1 = path.resolve(__dirname, "textSrc", "file7.txt");
+const filePath2 = path.resolve(__dirname, "textSrc", "com8.txt");
 
 // 调用比较函数
 compareFilesIgnoreOrder(filePath1, filePath2);
