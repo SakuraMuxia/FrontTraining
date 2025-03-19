@@ -1,0 +1,12 @@
+view,
+swiper,
+swiper-item {
+	// 设置怪异模式：border为 内填充
+	box-sizing: border-box;
+}
+
+.pageBg {
+	// 设置渐变
+	background: linear-gradient(to bottom, transparent, #fff 400rpx), linear-gradient(to right, #beecd8 20%, #f4e2d8);
+	min-height: 80vh;
+}
