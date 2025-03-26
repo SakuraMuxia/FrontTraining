@@ -4,14 +4,15 @@
 		<!-- 轮播图 -->
 		<view class="banner">
 			<swiper circular indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay>
-				<swiper-item>
-					<image src="../../common/images/banner1.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../common/images/banner2.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../common/images/banner3.jpg" mode="aspectFill"></image>
+				<swiper-item v-for="item in bannerList" :key="item._id">
+					<!-- 判断图片的性质 跳转到其他 微信小程序-->
+					<navigator v-if="item.target == 'miniProgram'" :url="item.url" class="like" target="miniProgram" :app-id="item.appid">
+						<image :src="item.picurl" mode="aspectFill"></image>
+					</navigator>
+					<!-- 普通图片跳转在本程序内的其他页面 -->
+					<navigator v-else :url="`/pages/classlist/classlist?${item.url}`" class="like">
+						<image :src="item.picurl" mode="aspectFill"></image>
+					</navigator>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -25,8 +26,10 @@
 			<!-- 中间 -->
 			<view class="center">
 				<swiper vertical autoplay interval="1500" duration="300" circular>
-					<swiper-item v-for="item in 4">
-						<navigator url="/pages/notice/notice">文字内容文字内容文字内容文字内容文字内容文字内容</navigator>
+					<swiper-item v-for="item in noticeList" :key="item._id">
+						<navigator :url="'/pages/notice/notice?id=' + item._id">
+							{{ item.title }}
+						</navigator>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -51,8 +54,8 @@
 			<!-- 内容 -->
 			<view class="content">
 				<scroll-view scroll-x>
-					<view class="box" v-for="item in 8" @click="goPreview">
-						<image src="../../common/images/preview_small.webp" mode="aspectFill"></image>
+					<view class="box" v-for="(item, index) in suggestList" :key="item._id" @click="goPreview(item._id)">
+						<image :src="item.smallPicurl" mode="aspectFill"></image>
 					</view>
 				</scroll-view>
 			</view>
@@ -69,7 +72,7 @@
 			</common-title>
 			<!-- 内容 -->
 			<view class="content">
-				<theme-item v-for="item in 8"></theme-item>
+				<theme-item v-for="(item, index) in classifyList" :key="item._id" :item="item"></theme-item>
 				<theme-item :isMore="true"></theme-item>
 			</view>
 		</view>
@@ -77,11 +80,78 @@
 </template>
 
 <script setup>
-	const goPreview = () => {
-		uni.navigateTo({
-			url: '/pages/preview/preview'
+import { ref } from 'vue';
+import { onReady } from '@dcloudio/uni-app';
+import { apiGetBanner, apiGetClassify, apiGetDayRandom, apiGetNotice } from '@/api/home/home.js';
+
+const bannerList = ref([]);
+const noticeList = ref([]);
+const suggestList = ref([]);
+const classifyList = ref([]);
+
+const goPreview = (id) => {
+	// 把推荐列表 存储到 localStorage中
+	uni.setStorageSync('storgClassList', suggestList.value);
+	uni.navigateTo({
+		url: '/pages/preview/preview?id=' + id
+	});
+};
+
+// 获取首页banner图
+const getBannerList = async () => {
+	await apiGetBanner()
+		.then((res) => {
+			// 存储banner图片
+			bannerList.value = res.data;
+		})
+		.catch((err) => {
+			console.log(err);
 		});
+};
+// 获取 公告列表
+const getNoticeList = async () => {
+	const params = {};
+	await apiGetNotice()
+		.then((res) => {
+			noticeList.value = res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+// 获取推荐列表
+const getDayRandom = async () => {
+	await apiGetDayRandom()
+		.then((res) => {
+			suggestList.value = res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+// 获取分类
+const getClassify = async () => {
+	const data = {
+		select: true // 无需 pageNum和pageSize
 	};
+	await apiGetClassify(data)
+		.then((res) => {
+			classifyList.value = res.data
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+onReady(() => {
+	// 调用获取首页banner图
+	getBannerList();
+	// 获取公告
+	getNoticeList();
+	// 调用获取推荐列表
+	getDayRandom();
+	// 获取分类
+	getClassify();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -97,10 +167,14 @@
 				width: 100%;
 				height: 100%;
 				padding: 0 30rpx;
-				image {
+				.like {
 					width: 100%;
 					height: 100%;
-					border-radius: 10rpx;
+					image {
+						width: 100%;
+						height: 100%;
+						border-radius: 10rpx;
+					}
 				}
 			}
 		}

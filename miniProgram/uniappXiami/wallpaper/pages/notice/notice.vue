@@ -1,26 +1,54 @@
 <template>
 	<view class="noticeLayout">
 		<view class="title">
-			<view class="tag">
+			<view class="tag" v-if="noticeInfo.select" >
 				<uni-tag inverted text="置顶" type="error" />
 			</view>
-			<view class="font">这个区域填写标题</view>
+			<view class="font">{{noticeInfo.title}}</view>
 		</view>
 
 		<view class="info">
-			<view class="item">咸虾米</view>
+			<view class="item">{{noticeInfo.author}}</view>
 			<view class="item">
 				<uni-dateformat :date="Date.now()" format="yyyy-MM-dd hh:mm:ss"></uni-dateformat>
 			</view>
 		</view>
 
-		<view class="content">内容区域</view>
+		<view class="content">
+			<mp-html :content="noticeInfo.content" />
+		</view>
 
-		<view class="count">阅读 5588</view>
+		<view class="count">阅读 {{noticeInfo.view_count}}</view>
 	</view>
 </template>
 
-<script setup></script>
+<script setup>
+import {ref} from 'vue'	
+import {onLoad} from "@dcloudio/uni-app"
+import {apiNoticeDetail} from "@/api/class/class.js"
+
+const noticeInfo = ref([])
+let noticeId
+
+// 获取公告详情接口
+const getNoticeDetail = async() => {
+	const params = {
+		id:noticeId
+	}
+	await apiNoticeDetail(params).then((res)=>{
+		noticeInfo.value = res.data
+	}).catch((err)=>{
+		console.log(err)
+	})
+}
+
+onLoad((event)=>{
+	noticeId = event.id
+	getNoticeDetail();
+})
+
+
+</script>
 
 <style lang="scss" scoped>
 .noticeLayout {

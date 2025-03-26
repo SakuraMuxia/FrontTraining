@@ -5,7 +5,7 @@ const BASE_URL = 'https://tea.qingnian8.com/api/bizhi';
 
 const request = (config) => {
 	// 请求配置项
-	const {
+	let {
 		// 请求接口
 		url,
 		// 请求体
@@ -18,9 +18,9 @@ const request = (config) => {
 	// 拼接url
 	url = BASE_URL + url
 	// 配置请求头
-	header['access-key'] = "xxm123321@#"
+	header['access-key'] = "sakuna@123"
 	// 返回一个Promise对象
-	return new Promise((res, rej) => {
+	return new Promise((resolve, reject) => {
 		uni.request({
 			url,
 			data,

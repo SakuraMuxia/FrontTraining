@@ -40,7 +40,15 @@
 			"path" : "pages/classlist/classlist",
 			"style" : 
 			{
-				"navigationBarTitleText" : "分类列表"
+				"navigationBarTitleText" : "分类列表",
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path" : "pages/search/search",
+			"style" : 
+			{
+				"navigationBarTitleText" : "搜索"
 			}
 		}
 	],

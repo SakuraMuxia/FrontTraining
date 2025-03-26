@@ -5,30 +5,30 @@
 			<view class="avatar">
 				<image src="../../static/images/logo.png" mode="aspectFill"></image>
 			</view>
-			<view class="ip">145.45.45.45</view>
-			<view class="address">来自于：河南</view>
+			<view class="ip">{{userInfo.IP}}</view>
+			<view class="address">来自于：{{ userInfo.address?.city || userInfo.address?.province || userInfo.address?.country}} </view>
 		</view>
 		<!-- 第一部分 -->
 		<view class="section">
 			<view class="list">
-				<view @click="goClassify" class="row">
+				<view @click="goClassListDown" class="row">
 					<view class="left">
 						<uni-icons type="download-filled" size="20"></uni-icons>
 						<view class="text">我的下载</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text">{{userInfo.downloadSize}}</view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
 				</view>
 
-				<view @click="goClassify" class="row">
+				<view @click="goClassListScore" class="row">
 					<view class="left">
 						<uni-icons type="star-filled" size="20"></uni-icons>
 						<view class="text">我的评分</view>
 					</view>
 					<view class="right">
-						<view class="text">0</view>
+						<view class="text">{{userInfo.scoreSize}}</view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
 				</view>
@@ -54,7 +54,7 @@
 		<!-- 第二部分 -->
 		<view class="section">
 			<view class="list">
-				<view class="row">
+				<navigator class="row" url="/pages/notice/notice?id=653507c6466d417a3718e94b">
 					<view class="left">
 						<uni-icons type="notification-filled" size="20"></uni-icons>
 						<view class="text">订阅更新</view>
@@ -63,9 +63,9 @@
 						<view class="text"></view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
-				</view>
+				</navigator>
 				
-				<view class="row">
+				<navigator url="/pages/notice/notice?id=6536358ce0ec19c8d67fbe82" class="row">
 					<view class="left">
 						<uni-icons type="flag-filled" size="20"></uni-icons>
 						<view class="text">常见问题</view>
@@ -74,7 +74,7 @@
 						<view class="text"></view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
-				</view>
+				</navigator>
 			</view>
 		</view>
 	</view>
@@ -82,18 +82,43 @@
 </template>
 
 <script setup>
+import {ref} from 'vue'
+import { apiUserInfo } from '../../api/user/user';
+import { getNavBarHeight } from "@/utils/system.js"
+import { onLoad } from "@dcloudio/uni-app"
+const userInfo = ref({
+	address: {}
+})
+// 拨打电话
 const clickContact = () => {
 	console.log('拨打电话');
 	// 调用 uni API
 	uni.makePhoneCall({
 		phoneNumber:"10086"
 	})
-};
-const goClassify = () => {
+}
+// 跳转到分类
+const goClassListDown = () => {
 	uni.navigateTo({
-		url: '/pages/classlist/classlist'
+		url: `/pages/classlist/classlist?name=我的下载&type=download`
 	});
 }
+const goClassListScore = () => {
+	uni.navigateTo({
+		url: `/pages/classlist/classlist?name=我的评分&type=score`
+	});
+}
+// 获取用户信息
+const getUserInfo = ()=>{
+	apiUserInfo().then(res=>{
+		console.log(res);
+		userInfo.value = res.data
+	})
+}
+onLoad(()=>{
+	// 获取用户信息
+	getUserInfo();
+})
 </script>
 
 <style lang="scss" scoped>

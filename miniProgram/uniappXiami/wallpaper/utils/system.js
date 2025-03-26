@@ -1,6 +1,5 @@
 // 获取手机系统信息
 const SYSTEM_INFO = uni.getSystemInfoSync();
-console.log("手机系统信息", SYSTEM_INFO)
 
 // 获取状态栏高度
 const getStatusBarHeight = () => {
