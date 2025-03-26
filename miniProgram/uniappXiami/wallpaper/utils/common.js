@@ -13,9 +13,9 @@ const compareTimestamp = (timestamp) => {
 		return Math.floor(timeDiff / 3600000) + '小时';
 	} else if (timeDiff < 2592000000) {
 		return Math.floor(timeDiff / 86400000) + '天';
-	} else if (timeDiff < 7776000000) {
+	} else if (timeDiff < 7776000000) { // 3个月内返回 
 		return Math.floor(timeDiff / 2592000000) + '月';
-	} else {
+	} else { // 超过3个月返回null
 		return null;
 	}
 }
